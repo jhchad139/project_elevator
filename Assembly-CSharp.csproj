@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Assets\code\start_title_button.cs" />
     <Compile Include="Assets\code\Gamemanager.cs" />
+    <Compile Include="Assets\code\bullet.cs" />
     <Compile Include="Assets\code\Player.cs" />
   </ItemGroup>
   <ItemGroup>

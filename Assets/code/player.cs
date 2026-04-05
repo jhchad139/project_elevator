@@ -8,6 +8,11 @@ public class Player : MonoBehaviour
     public float speed;
     public int dashCount;
 
+
+    //임시적으로 총알 프리팹을 넣어줄 변수
+    public Transform Bulletsp;
+    public GameObject Bulletprefab;
+
     Rigidbody2D rigid;
     Animator anima;
     SpriteRenderer sprite;
@@ -26,7 +31,11 @@ public class Player : MonoBehaviour
     bool isCooldown = false;
     bool dashtimeronoff = false;
     bool cooldowntimeronoff = false;
-    // 대시 관련 변수
+    
+    // 발사 관련 변수 ( 임시)
+    bool isFire = false;
+
+
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -72,8 +81,16 @@ public class Player : MonoBehaviour
             cooldowntimeronoff = false;
             cooldownTimer = 0;
         }
+
+        if (isFire == true)
+        {
+            var bulletgo = Instantiate(Bulletprefab);
+            bulletgo.transform.position = Bulletsp.position;
+            isFire = false;
+        }
     }
     void OnMove(InputValue value)
+
     {
       inputvec = value.Get<Vector2>();
     }
@@ -92,25 +109,17 @@ public class Player : MonoBehaviour
     public void Dash()
     {
         dashvec = inputvec.normalized;
-        if (dashCount <= 0 || isCooldown == true)
+        if (dashCount <= 0 || isCooldown == true || dashvec.magnitude == 0)
             return;
-
-        
-
-        
         isDashing = true;
         isCooldown = true;
         dashtimeronoff = true;
         cooldowntimeronoff = true;
         dashCount--;
-
-        // 타이머 구현
-
-
-        
-
-        
-
         return;
+    }   
+    public void Fire()
+    {
+        isFire = true;
     }
 }
