@@ -4,6 +4,7 @@ public class Gamemanager : MonoBehaviour
 {
     public static Gamemanager Instance;
     public Player player;
+    public Poolmanager pool;
 
     void Awake()
     {

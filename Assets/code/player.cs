@@ -84,8 +84,15 @@ public class Player : MonoBehaviour
 
         if (isFire == true)
         {
-            var bulletgo = Instantiate(Bulletprefab);
-            bulletgo.transform.position = Bulletsp.position;
+            Debug.Log(Gamemanager.Instance);
+            Debug.Log(Gamemanager.Instance.pool);
+            Debug.Log(Bulletsp);
+
+            GameObject bulletgo = Gamemanager.Instance.pool.Get(0);
+            Debug.Log(bulletgo);
+
+            bulletgo.transform.position = Bulletsp.transform.position;
+
             isFire = false;
         }
     }
@@ -120,6 +127,8 @@ public class Player : MonoBehaviour
     }   
     public void Fire()
     {
+        Debug.Log(Gamemanager.Instance);
+        Debug.Log(Gamemanager.Instance.pool);
         isFire = true;
     }
 }

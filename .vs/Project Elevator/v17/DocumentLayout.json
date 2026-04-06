@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "E:\\Unity\\Unity Projects\\Project Elevator\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{426AE4DA-E556-B594-8D26-F7C899BC6FD9}|Assembly-CSharp.csproj|e:\\unity\\unity projects\\project elevator\\assets\\code\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{426AE4DA-E556-B594-8D26-F7C899BC6FD9}|Assembly-CSharp.csproj|e:\\unity\\unity projects\\project elevator\\assets\\code\\area_trigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{426AE4DA-E556-B594-8D26-F7C899BC6FD9}|Assembly-CSharp.csproj|solutionrelative:assets\\code\\area_trigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{426AE4DA-E556-B594-8D26-F7C899BC6FD9}|Assembly-CSharp.csproj|e:\\unity\\unity projects\\project elevator\\assets\\code\\bullet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{426AE4DA-E556-B594-8D26-F7C899BC6FD9}|Assembly-CSharp.csproj|solutionrelative:assets\\code\\bullet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{426AE4DA-E556-B594-8D26-F7C899BC6FD9}|Assembly-CSharp.csproj|E:\\Unity\\Unity Projects\\Project Elevator\\assets\\code\\poolmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{426AE4DA-E556-B594-8D26-F7C899BC6FD9}|Assembly-CSharp.csproj|solutionrelative:assets\\code\\poolmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{426AE4DA-E556-B594-8D26-F7C899BC6FD9}|Assembly-CSharp.csproj|E:\\Unity\\Unity Projects\\Project Elevator\\assets\\code\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{426AE4DA-E556-B594-8D26-F7C899BC6FD9}|Assembly-CSharp.csproj|solutionrelative:assets\\code\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{426AE4DA-E556-B594-8D26-F7C899BC6FD9}|Assembly-CSharp.csproj|E:\\Unity\\Unity Projects\\Project Elevator\\assets\\code\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{426AE4DA-E556-B594-8D26-F7C899BC6FD9}|Assembly-CSharp.csproj|solutionrelative:assets\\code\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{426AE4DA-E556-B594-8D26-F7C899BC6FD9}|Assembly-CSharp.csproj|E:\\Unity\\Unity Projects\\Project Elevator\\assets\\code\\start_title_button.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -18,7 +34,7 @@
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
-      "VerticalTabListWidth": 256,
+      "VerticalTabListWidth": 100,
       "DocumentGroups": [
         {
           "DockedWidth": 200,
@@ -27,19 +43,68 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "player.cs",
-              "DocumentMoniker": "E:\\Unity\\Unity Projects\\Project Elevator\\Assets\\code\\player.cs",
-              "RelativeDocumentMoniker": "Assets\\code\\player.cs",
-              "ToolTip": "E:\\Unity\\Unity Projects\\Project Elevator\\Assets\\code\\player.cs",
-              "RelativeToolTip": "Assets\\code\\player.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAzwCYAAAAJAAAAAAAAAA==",
+              "Title": "Area_Trigger.cs",
+              "DocumentMoniker": "E:\\Unity\\Unity Projects\\Project Elevator\\Assets\\code\\Area_Trigger.cs",
+              "RelativeDocumentMoniker": "Assets\\code\\Area_Trigger.cs",
+              "ToolTip": "E:\\Unity\\Unity Projects\\Project Elevator\\Assets\\code\\Area_Trigger.cs",
+              "RelativeToolTip": "Assets\\code\\Area_Trigger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T02:12:39.13Z",
+              "WhenOpened": "2026-04-06T07:32:59.367Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "bullet.cs",
+              "DocumentMoniker": "E:\\Unity\\Unity Projects\\Project Elevator\\Assets\\code\\bullet.cs",
+              "RelativeDocumentMoniker": "Assets\\code\\bullet.cs",
+              "ToolTip": "E:\\Unity\\Unity Projects\\Project Elevator\\Assets\\code\\bullet.cs",
+              "RelativeToolTip": "Assets\\code\\bullet.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T06:29:27.061Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "player.cs",
+              "DocumentMoniker": "E:\\Unity\\Unity Projects\\Project Elevator\\Assets\\code\\player.cs",
+              "RelativeDocumentMoniker": "Assets\\code\\player.cs",
+              "ToolTip": "E:\\Unity\\Unity Projects\\Project Elevator\\Assets\\code\\player.cs",
+              "RelativeToolTip": "Assets\\code\\player.cs",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAgwFwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T02:12:39.13Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Gamemanager.cs",
+              "DocumentMoniker": "E:\\Unity\\Unity Projects\\Project Elevator\\Assets\\code\\Gamemanager.cs",
+              "RelativeDocumentMoniker": "Assets\\code\\Gamemanager.cs",
+              "ToolTip": "E:\\Unity\\Unity Projects\\Project Elevator\\Assets\\code\\Gamemanager.cs",
+              "RelativeToolTip": "Assets\\code\\Gamemanager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T02:10:19.194Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Poolmanager.cs",
+              "DocumentMoniker": "E:\\Unity\\Unity Projects\\Project Elevator\\Assets\\code\\Poolmanager.cs",
+              "RelativeDocumentMoniker": "Assets\\code\\Poolmanager.cs",
+              "ToolTip": "E:\\Unity\\Unity Projects\\Project Elevator\\Assets\\code\\Poolmanager.cs",
+              "RelativeToolTip": "Assets\\code\\Poolmanager.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAQwBoAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T01:35:10.448Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "start_title_button.cs",
               "DocumentMoniker": "E:\\Unity\\Unity Projects\\Project Elevator\\Assets\\code\\start_title_button.cs",
               "RelativeDocumentMoniker": "Assets\\code\\start_title_button.cs",
@@ -51,7 +116,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "circle.cs",
               "DocumentMoniker": "E:\\Unity\\Unity Projects\\Project Elevator\\Assets\\code\\circle.cs",
               "RelativeDocumentMoniker": "Assets\\code\\circle.cs",
