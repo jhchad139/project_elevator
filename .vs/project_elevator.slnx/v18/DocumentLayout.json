@@ -3,64 +3,47 @@
   "WorkspaceRootPath": "C:\\Unity project\\project elevator\\project_elevator\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Unity project\\project elevator\\project_elevator\\Assets\\code\\Player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\code\\Player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\unity project\\project elevator\\project_elevator\\assets\\code\\trigger\\ui_trigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\code\\trigger\\ui_trigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\unity project\\project elevator\\project_elevator\\assets\\code\\bullet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\code\\bullet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\unity project\\project elevator\\project_elevator\\assets\\code\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\code\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Unity project\\project elevator\\project_elevator\\Assets\\code\\manager\\Choicemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\code\\manager\\Choicemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
-      "VerticalTabListWidth": 256,
+      "VerticalTabListWidth": 100,
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "bullet.cs",
-              "DocumentMoniker": "C:\\Unity project\\project elevator\\project_elevator\\Assets\\code\\bullet.cs",
-              "RelativeDocumentMoniker": "Assets\\code\\bullet.cs",
-              "ToolTip": "C:\\Unity project\\project elevator\\project_elevator\\Assets\\code\\bullet.cs",
-              "RelativeToolTip": "Assets\\code\\bullet.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-05T06:57:45.002Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Gamemanager.cs",
-              "DocumentMoniker": "C:\\Unity project\\project elevator\\project_elevator\\Assets\\code\\Gamemanager.cs",
-              "RelativeDocumentMoniker": "Assets\\code\\Gamemanager.cs",
-              "ToolTip": "C:\\Unity project\\project elevator\\project_elevator\\Assets\\code\\Gamemanager.cs",
-              "RelativeToolTip": "Assets\\code\\Gamemanager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-05T06:54:18.253Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Player.cs",
-              "DocumentMoniker": "C:\\Unity project\\project elevator\\project_elevator\\Assets\\code\\Player.cs",
-              "RelativeDocumentMoniker": "Assets\\code\\Player.cs",
-              "ToolTip": "C:\\Unity project\\project elevator\\project_elevator\\Assets\\code\\Player.cs",
-              "RelativeToolTip": "Assets\\code\\Player.cs",
-              "ViewState": "AgIAAD8AAAAAAAAAAAAqwFwAAAAAAAAAAAAAAA==",
+              "Title": "UI_Trigger.cs",
+              "DocumentMoniker": "C:\\Unity project\\project elevator\\project_elevator\\Assets\\code\\trigger\\UI_Trigger.cs",
+              "RelativeDocumentMoniker": "Assets\\code\\trigger\\UI_Trigger.cs",
+              "ToolTip": "C:\\Unity project\\project elevator\\project_elevator\\Assets\\code\\trigger\\UI_Trigger.cs",
+              "RelativeToolTip": "Assets\\code\\trigger\\UI_Trigger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvxgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-05T06:46:09.512Z",
+              "WhenOpened": "2026-05-05T19:39:22.476Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Choicemanager.cs",
+              "DocumentMoniker": "C:\\Unity project\\project elevator\\project_elevator\\Assets\\code\\manager\\Choicemanager.cs",
+              "RelativeDocumentMoniker": "Assets\\code\\manager\\Choicemanager.cs",
+              "ToolTip": "C:\\Unity project\\project elevator\\project_elevator\\Assets\\code\\manager\\Choicemanager.cs",
+              "RelativeToolTip": "Assets\\code\\manager\\Choicemanager.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAmwDoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-05T19:35:14.167Z",
               "EditorCaption": ""
             }
           ]

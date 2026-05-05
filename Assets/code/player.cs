@@ -3,11 +3,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public float speed;
-    public int dashCount;
+{   //player 기능 구현
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
+    public float speed;
+    
 
     //임시적으로 총알 프리팹을 넣어줄 변수
     public Transform Bulletsp;
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
     Animator anima;
     SpriteRenderer sprite;
     Vector2 inputvec;
+    player_status status;
 
 
     // 대시 관련 변수
@@ -41,6 +43,7 @@ public class Player : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         anima = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        status = GetComponent<player_status>();
     }
 
     // Update is called once per frame
@@ -116,13 +119,16 @@ public class Player : MonoBehaviour
     public void Dash()
     {
         dashvec = inputvec.normalized;
-        if (dashCount <= 0 || isCooldown == true || dashvec.magnitude == 0)
+        if (isCooldown == true || dashvec.magnitude == 0)
             return;
+
+        if (status.UseDash() == false)
+            return;
+
         isDashing = true;
         isCooldown = true;
         dashtimeronoff = true;
         cooldowntimeronoff = true;
-        dashCount--;
         return;
     }   
     public void Fire()
