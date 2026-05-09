@@ -7,6 +7,8 @@ public class Gamemanager : MonoBehaviour
     public Poolmanager pool;
     public Choicemanager choice;
     public Floormanager floor;
+    public Listmanager list;
+    
 
     void Awake()
     {

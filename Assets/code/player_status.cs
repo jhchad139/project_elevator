@@ -15,7 +15,15 @@ public class player_status : MonoBehaviour
         dashCount = maxdashCount;
     }
 
-
+    private void Update()
+    {
+        if (hp > maxHp)
+            hp = maxHp;
+        if (dashCount > maxdashCount)
+            dashCount = maxdashCount;
+        if (dashCount < 0)
+            dashCount = 0;
+    }
 
     public bool UseDash()
     {
@@ -24,27 +32,24 @@ public class player_status : MonoBehaviour
         dashCount--;
         return true;
     }
-    public void Max_hp(int n)
+    public void Max_hpchange(int n)
     {
         maxHp += n;
         
     }
-    public void Heal(int n)
+    public void Hp_change(int n)
     {
         hp += n;
 
         if ( hp >= maxHp)
             hp = maxHp;
-    }
-
-    public void Damage(int n)
-    {
-        hp -= n;
 
         if (hp <= 0)
             hp = 0;
         // 뭐 나중에 비활성화 로직을 넣던 하자구용
     }
+
+  
 
     
 }
