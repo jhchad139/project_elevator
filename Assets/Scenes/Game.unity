@@ -335,7 +335,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.8
+  orthographic size: 3.6000001
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1483,7 +1483,7 @@ GameObject:
   - component: {fileID: 635601764}
   - component: {fileID: 635601767}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: tmp_trig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

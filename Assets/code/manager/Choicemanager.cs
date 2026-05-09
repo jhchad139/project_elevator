@@ -37,11 +37,13 @@ public class Choicemanager : MonoBehaviour
     void SelectL()
     {
         status.Heal(5);
+        Endchoice();
     }
 
     void SelectR()
     {
         status.Damage(5);
+        Endchoice();
     }
 
     public void Openchoice()// 
