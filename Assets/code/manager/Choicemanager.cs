@@ -12,6 +12,7 @@ public class Choicemanager : MonoBehaviour
     public TMP_Text lefttxt;
     public TMP_Text righttxt; // 버튼의 텍스트
     public TMP_Text hptxt;
+    public TMP_Text floortxt;
 
     public player_status status;
 
@@ -29,6 +30,7 @@ public class Choicemanager : MonoBehaviour
     private void Update()
     {
         hptxt.text = $"HP : {status.hp}";
+        floortxt.text = $"Floor : {Gamemanager.Instance.floor.currentFloor}";
 
     }
     // Update is called once per frame
@@ -37,12 +39,15 @@ public class Choicemanager : MonoBehaviour
     void SelectL()
     {
         status.Heal(5);
+        Gamemanager.Instance.floor.CompleteChoice();
         Endchoice();
+    
     }
 
     void SelectR()
     {
         status.Damage(5);
+        Gamemanager.Instance.floor.CompleteChoice();
         Endchoice();
     }
 
@@ -51,25 +56,33 @@ public class Choicemanager : MonoBehaviour
         if (can_choice != true)
             return;
 
+        if (Gamemanager.Instance.floor.isTopfloor == true)
+        {
+            return;
+        }
+         // 조건 만족을 하면 판넬이 꺼진 상태
         choicePanel.SetActive(true);
 
+       
         lefttxt.text = "hp + 5";
-        righttxt.text = "he - 5";
+        righttxt.text = "hp - 5";
     }
 
     public void Offchoice()
     {
+        
         choicePanel.SetActive(false);
     }
+
     void Endchoice()
     {
         choicePanel.SetActive(false);
         can_choice = false;
 
-        Invoke("Enablechoice",5f); //5초 뒤에 ""함수 실행
+        Invoke("Enablechoice",1f); //5초 뒤에 ""함수 실행
     }
 
-    void Enablechoice() // 버튼 활성화
+    void Enablechoice() // 누를수 있는 자격
     {
         can_choice=true;
     }
