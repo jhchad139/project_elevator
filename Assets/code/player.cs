@@ -105,6 +105,7 @@ public class Player : MonoBehaviour
     {
         Vector2 touchPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
+        //클릭 위치가 실제 터치보다 위에서 판정되어 임시 보정값 적용
         touchPos += Vector2.down * 1.5f;
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(touchPos,0.3f);
