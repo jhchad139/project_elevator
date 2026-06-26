@@ -29,8 +29,8 @@ public class Choicemanager : MonoBehaviour
     public bool can_choice = true; // 조건
 
     ChoiceSet Now_list; // 지금 선택된 리스트 class
-    
 
+    bool is_summon = false;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,6 +46,7 @@ public class Choicemanager : MonoBehaviour
     {
         hptxt.text = $"HP : {status.hp} / {status.maxHp}";
         floortxt.text = $"Floor : {Gamemanager.Instance.floor.currentFloor}";
+
 
     } // 나중에 옮길거임 확인
     // Update is called once per frame
@@ -133,8 +134,14 @@ public class Choicemanager : MonoBehaviour
             status.dashCount += option.dashcountchange;
 
 
+        if (option.monsterNumber != 0)
+        {
+            Gamemanager.Instance.monster.Summon(option.monsterNumber);
+            is_summon = true;
+        }
+    
 
-        Gamemanager.Instance.floor.CompleteChoice();
+    Gamemanager.Instance.floor.CompleteChoice();
         Endchoice();
     }
 }

@@ -22,6 +22,8 @@ public class Listmanager : MonoBehaviour
         public int maxhpchange;
         public int dashcountchange;
 
+        public int monsterNumber;
+
         public bool skip;
 
     } // 버튼 클릭 시 변화하는 머시깽이들
