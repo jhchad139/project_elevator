@@ -4,14 +4,19 @@ public class bullet : MonoBehaviour
 {
 
     public float speed ;
-    
-    
 
-    // Update is called once per frame
+    Vector2 btargetvec;
+
+
+
+    public void init(Vector2 target)
+    {
+        btargetvec = target.normalized;
+    }
     void Update()
     {
         
-        this.transform.Translate(Vector2.right * speed * Time.deltaTime);
+        this.transform.Translate(btargetvec * speed * Time.deltaTime);
     }
 
 
