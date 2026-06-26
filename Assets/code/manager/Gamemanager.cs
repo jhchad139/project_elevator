@@ -8,6 +8,7 @@ public class Gamemanager : MonoBehaviour
     public Choicemanager choice;
     public Floormanager floor;
     public Listmanager list;
+    public Enemymanager monster;
     
 
     void Awake()
