@@ -14,11 +14,17 @@ public class Player : MonoBehaviour
     public Transform Bulletsp;
     public GameObject Bulletprefab;
 
+    //타겟 설정
+    public Enemy target;
+    Vector2 targetdir;
+
     Rigidbody2D rigid;
     Animator anima;
     SpriteRenderer sprite;
     Vector2 inputvec;
     player_status status;
+
+
 
 
     // 대시 관련 변수
@@ -34,8 +40,7 @@ public class Player : MonoBehaviour
     bool dashtimeronoff = false;
     bool cooldowntimeronoff = false;
     
-    // 발사 관련 변수 ( 임시)
-    bool isFire = false;
+   
 
 
     void Awake()
@@ -66,6 +71,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+
+        //대쉬
         if (dashtimeronoff == true)
             dashTimer += Time.deltaTime;
         if (dashTimer >= dashing)
@@ -85,19 +92,33 @@ public class Player : MonoBehaviour
             cooldownTimer = 0;
         }
 
-        if (isFire == true)
+        
+        //타겟
+        if(Mouse.current.leftButton.wasPressedThisFrame)
         {
-            Debug.Log(Gamemanager.Instance);
-            Debug.Log(Gamemanager.Instance.pool);
-            Debug.Log(Bulletsp);
-
-            GameObject bulletgo = Gamemanager.Instance.pool.Get(0);
-            Debug.Log(bulletgo);
-
-            bulletgo.transform.position = Bulletsp.transform.position;
-
-            isFire = false;
+            
+            TargetSet();
         }
+    }
+
+    void TargetSet()
+    {
+        Vector2 touchPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+        //클릭 위치가 실제 터치보다 위에서 판정되어 임시 보정값 적용
+        touchPos += Vector2.down * 1.5f;
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(touchPos,0.3f);
+        foreach (Collider2D hit in hits)
+        {
+            if (hit.CompareTag("Enemy"))
+            {
+                target = hit.GetComponent<Enemy>();
+                break;
+            }
+        }
+        
+        
     }
     void OnMove(InputValue value)
 
@@ -116,6 +137,7 @@ public class Player : MonoBehaviour
         anima.SetFloat("speed", inputvec.magnitude); // inputvec을 감지해서 넣음, speed는 0.01이상이면 작동하니까    
     }
 
+    
     public void Dash()
     {
         dashvec = inputvec.normalized;
@@ -130,11 +152,22 @@ public class Player : MonoBehaviour
         dashtimeronoff = true;
         cooldowntimeronoff = true;
         return;
-    }   
+    }
     public void Fire()
     {
-        Debug.Log(Gamemanager.Instance);
-        Debug.Log(Gamemanager.Instance.pool);
-        isFire = true;
+
+        GameObject bullet = Gamemanager.Instance.pool.Get(0);
+
+        bullet.transform.position = Bulletsp.position;
+
+        Vector2 dir = Vector2.right;
+
+        if (target != null)
+        {
+            Vector2 bulletdir = target.transform.position - Bulletsp.position;
+            dir = bulletdir.normalized;
+        }
+
+        bullet.GetComponent<bullet>().init(dir);
     }
 }
