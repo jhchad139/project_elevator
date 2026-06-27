@@ -6,16 +6,24 @@ public class Enemy : MonoBehaviour
     public float speed;
     public Rigidbody2D etarget;
     public int hp;
-    public int maxHp = 100;
+    public int maxHp = 10;
+
+
+    public bool is_dead = false;
+
+    public bool is_knockback = false;
 
     Rigidbody2D rigid;
     Collider2D coll;
     SpriteRenderer sprite;
+    Animator anima;
     void Awake()
     {
         rigid =  GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
         sprite = GetComponent<SpriteRenderer>();
+        anima = GetComponent<Animator>();
+        hp = maxHp;
     }
 
     void OnEnable()
@@ -39,4 +47,38 @@ public class Enemy : MonoBehaviour
         else
             sprite.flipX = false;
     }
+
+    private void Update()
+    {
+        
+    }
+
+    //Ãæµ¹
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        is_knockback = true;
+        if (!collision.CompareTag("Bullet"))
+            return;
+        damage(1);
+        anima.SetTrigger("hit");
+        collision.gameObject.SetActive(false); // ÃÑ¾Ë »ç¶óÁü
+    }
+
+    void damage(int n)
+    {
+        hp -= n;
+
+        if (hp <= 0) {  
+            hp = 0;
+            Die();
+        }
+            
+    }
+
+    void Die()
+    {
+        gameObject.SetActive(false);
+        Gamemanager.Instance.player.target = null;
+    }
 }
+    
