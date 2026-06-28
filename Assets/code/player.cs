@@ -191,5 +191,7 @@ public class Player : MonoBehaviour
         }
 
         bullet.GetComponent<bullet>().init(dir);
+        
+        
     }
 }
