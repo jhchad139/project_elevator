@@ -39,8 +39,13 @@ public class Player : MonoBehaviour
     bool isCooldown = false;
     bool dashtimeronoff = false;
     bool cooldowntimeronoff = false;
-    
-   
+
+    // 발사 쿨타임 관련 변수
+    float firecooldownTimer = 0;
+    double fireCooldown = 0.4f;
+
+    bool is_firecool = false; //지금 쿨타임이니?
+    bool firetimeronoff = false; // 타이머 돌고있니?
 
 
     void Awake()
@@ -90,6 +95,18 @@ public class Player : MonoBehaviour
             isCooldown = false;
             cooldowntimeronoff = false;
             cooldownTimer = 0;
+        }
+
+        //발사
+        if (firetimeronoff == true)
+        {
+            firecooldownTimer += Time.deltaTime;
+        }
+        if (firecooldownTimer >= fireCooldown)
+        {
+            firecooldownTimer = 0;
+            firetimeronoff = false;
+            is_firecool = false;
         }
 
         
@@ -155,6 +172,11 @@ public class Player : MonoBehaviour
     }
     public void Fire()
     {
+        if (is_firecool == true)
+            return;
+
+        is_firecool = true;
+        firetimeronoff = true;
 
         GameObject bullet = Gamemanager.Instance.pool.Get(0);
 
@@ -169,5 +191,7 @@ public class Player : MonoBehaviour
         }
 
         bullet.GetComponent<bullet>().init(dir);
+        
+        
     }
 }
