@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class UI_Trigger : MonoBehaviour
 {
+    //가까이 오면 판넬 띄우는 코드
     public Choicemanager choicemanager; // 객체A를 B이름으로 써먹을거에요
     public bool first = false;
    

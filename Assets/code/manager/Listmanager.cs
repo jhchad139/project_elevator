@@ -24,6 +24,8 @@ public class Listmanager : MonoBehaviour
 
         public int monsterNumber;
 
+        public int giveAmmo;
+
         public bool skip;
 
     } // 버튼 클릭 시 변화하는 머시깽이들

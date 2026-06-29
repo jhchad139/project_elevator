@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3340f411ce6bd7b46865670e7b82b76e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::bullet
-  speed: 10
+  speed: 20
 --- !u!114 &9116806327273938949
 MonoBehaviour:
   m_ObjectHideFlags: 0
