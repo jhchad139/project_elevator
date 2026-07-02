@@ -2,6 +2,7 @@ using Unity.VisualScripting.InputSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class Player : MonoBehaviour
 {   //player 기능 구현
 
@@ -190,7 +191,7 @@ public class Player : MonoBehaviour
             else
                 return;
         }
- 
+        CameraShake.Instance.Shake();
         is_firecool = true;
         firetimeronoff = true;
 
@@ -207,6 +208,7 @@ public class Player : MonoBehaviour
         }
 
         bullet.GetComponent<bullet>().init(dir);
+        
         status.ammo--;
         
     }
