@@ -46,6 +46,9 @@ public class Player : MonoBehaviour
 
     bool is_firecool = false; //지금 쿨타임이니?
     bool firetimeronoff = false; // 타이머 돌고있니?
+    public bool is_reroading = false;
+
+    
 
 
     void Awake()
@@ -172,9 +175,22 @@ public class Player : MonoBehaviour
     }
     public void Fire()
     {
-        if (is_firecool == true)
+        if (is_firecool == true || is_reroading == true)
             return;
+        if (status.ammo <=0)
+        {
+            if (status.bullet_count > 0)
+            {
+                //대충 재장전 로직
+                is_reroading = true;
+                Invoke("Reloading", 2f);
+                return;
+            }
 
+            else
+                return;
+        }
+ 
         is_firecool = true;
         firetimeronoff = true;
 
@@ -191,7 +207,17 @@ public class Player : MonoBehaviour
         }
 
         bullet.GetComponent<bullet>().init(dir);
+        status.ammo--;
         
-        
+    }
+
+    public void Reloading()
+    {
+        int need = status.max_ammo - status.ammo;
+        int load = Mathf.Min(need, status.bullet_count);
+
+        status.ammo += load;
+        status.bullet_count -= load;
+        is_reroading = false;
     }
 }

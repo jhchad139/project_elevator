@@ -21,8 +21,7 @@ public class Choicemanager : MonoBehaviour
     public TMP_Text paneltxt;
     public TMP_Text lefttxt;
     public TMP_Text righttxt; // 버튼의 텍스트
-    public TMP_Text hptxt;
-    public TMP_Text floortxt;
+    
 
     public player_status status;
 
@@ -30,7 +29,7 @@ public class Choicemanager : MonoBehaviour
 
     ChoiceSet Now_list; // 지금 선택된 리스트 class
 
-    bool is_summon = false;
+    //bool is_summon = false;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -42,27 +41,18 @@ public class Choicemanager : MonoBehaviour
        
     }
 
-    private void Update()
-    {
-        hptxt.text = $"HP : {status.hp} / {status.maxHp}";
-        floortxt.text = $"Floor : {Gamemanager.Instance.floor.currentFloor}";
-
-
-    } // 나중에 옮길거임 확인
+  // 나중에 옮길거임 확인
     // Update is called once per frame
 
 
     void SelectL()
     {
         ActionChoice(Now_list.left);
-        
-    
     }
 
     void SelectR()
     {
         ActionChoice(Now_list.right);
-        
     }
 
     public void Openchoice()// 
@@ -133,13 +123,16 @@ public class Choicemanager : MonoBehaviour
         if (option.dashcountchange != 0)
             status.dashCount += option.dashcountchange;
 
-
         if (option.monsterNumber != 0)
         {
             Gamemanager.Instance.monster.Summon(option.monsterNumber);
-            is_summon = true;
+            //is_summon = true;
         }
-    
+        if (option.giveAmmo != 0)
+        {
+            status.bullet_count += option.giveAmmo;
+        }
+
 
     Gamemanager.Instance.floor.CompleteChoice();
         Endchoice();
