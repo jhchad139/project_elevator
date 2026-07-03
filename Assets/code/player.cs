@@ -191,6 +191,7 @@ public class Player : MonoBehaviour
             else
                 return;
         }
+
         CameraShake.Instance.Shake();
         is_firecool = true;
         firetimeronoff = true;
