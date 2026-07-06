@@ -53,6 +53,11 @@ public class player_status : MonoBehaviour
 
         if (hp <= 0)
             hp = 0;
+
+        if (n < 0)
+        {
+            Gamemanager.Instance.player.HitEffect();
+        }
         // 뭐 나중에 비활성화 로직을 넣던 하자구용
     }
 

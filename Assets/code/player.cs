@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting.InputSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -192,7 +193,7 @@ public class Player : MonoBehaviour
                 return;
         }
 
-        CameraShake.Instance.Shake();
+        CameraShake.Instance.Shake(0);
         is_firecool = true;
         firetimeronoff = true;
 
@@ -222,5 +223,24 @@ public class Player : MonoBehaviour
         status.ammo += load;
         status.bullet_count -= load;
         is_reroading = false;
+    }
+
+    public void HitEffect()
+    {
+        CameraShake.Instance.Shake(1);
+        StartCoroutine(HitSprite());
+        StartCoroutine(HitStop());
+    }
+    IEnumerator HitSprite()
+    { 
+        sprite.color = new Color(1f, 0.6f, 0.6f, 1f);
+        yield return new WaitForSeconds(0.1f);
+        sprite.color = Color.white;
+    }
+    IEnumerator HitStop()
+    {
+        Time.timeScale = 0.05f;
+        yield return new WaitForSecondsRealtime(0.1f);
+        Time.timeScale = 1f;
     }
 }

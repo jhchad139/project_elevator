@@ -53,17 +53,13 @@ public class Enemy : MonoBehaviour
             return;
 
         if (is_attack)
-            return;
-
-
-        /*
-        float distance = Vector2.Distance(rigid.position,etarget.position);
-        if  (distance <= attackRange)
         {
-            Attack();
+            rigid.linearVelocity = Vector2.zero;
             return;
         }
-        *///위에서 공격하는것도 고려했음
+
+
+        //위에서 공격하는것도 고려했음
         Vector2 diff = etarget.position - rigid.position;
 
         if (Mathf.Abs(diff.x) < attackRangeX &&
@@ -91,8 +87,9 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
+        if (is_attack) return;
         is_attack = true;
-
+        rigid.linearVelocity = Vector2.zero;
         attackTimer = attackCooldown;
 
         Vector2 dir = (etarget.position - rigid.position).normalized; // 방향잡고
@@ -103,8 +100,9 @@ public class Enemy : MonoBehaviour
 
         anima.speed = 0;
 
-        rigid.constraints = RigidbodyConstraints2D.FreezePosition |
-                        RigidbodyConstraints2D.FreezeRotation; // 움직이지 않게 얼리는것!
+        //rigid.constraints = RigidbodyConstraints2D.FreezePosition |
+        //    RigidbodyConstraints2D.FreezeRotation; // 움직이지 않게 얼리는것!
+        rigid.linearVelocity = Vector2.zero;
 
     }
     private void Update()

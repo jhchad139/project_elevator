@@ -20,18 +20,25 @@ using UnityEngine;
 
 
 
-    public void Shake()
+    public void Shake(int n)
     {
         Debug.Log("Shake");
-        if (player.target)
+        if (n == 0) //0은 플레이어
         {
-            Vector2 dir = player.target.transform.position - player.transform.position;
-            Vector2 cdir = dir.normalized;
-            impulse.GenerateImpulse(cdir * 0.2f);
+            if (player.target)
+            {
+                Vector2 dir = player.target.transform.position - player.transform.position;
+                Vector2 cdir = dir.normalized;
+                impulse.GenerateImpulse(cdir * 0.2f);
+            }
+            else impulse.GenerateImpulse(Vector2.right * 0.2f);
         }
-        else impulse.GenerateImpulse(Vector2.right * 0.2f);
+        if(n == 1) //1은 그냥 흔들기
+        {
+            impulse.GenerateImpulse();
+        }
     }
 
-    }
+}
 
 
