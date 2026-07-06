@@ -197,5 +197,8 @@ MonoBehaviour:
   etarget: {fileID: 0}
   hp: 0
   maxHp: 10
+  attackRangeX: 1
+  attackRangeY: 1.5
+  attackCooldown: 1
   is_dead: 0
   is_knockback: 0

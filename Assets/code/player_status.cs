@@ -14,6 +14,8 @@ public class player_status : MonoBehaviour
     public int max_ammo = 6;
 
     public int bullet_count = 0;
+
+    
     void Awake()
     {
         hp = maxHp;

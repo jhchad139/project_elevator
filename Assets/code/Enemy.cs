@@ -10,6 +10,13 @@ public class Enemy : MonoBehaviour
     public int hp;
     public int maxHp = 10;
 
+    [Header("Attack")]
+    public float attackRangeX = 1f;
+    public float attackRangeY = 1.5f;
+    public float attackCooldown = 1f;
+
+    bool is_attack = false;
+    float attackTimer = 0f;
 
     public bool is_dead = false;
 
@@ -39,27 +46,80 @@ public class Enemy : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (!is_knockback)
+        if (is_dead)
+            return;
+
+        if (is_knockback)
+            return;
+
+        if (is_attack)
+            return;
+
+
+        /*
+        float distance = Vector2.Distance(rigid.position,etarget.position);
+        if  (distance <= attackRange)
         {
-            Vector2 dirvec = etarget.position - rigid.position; // 방향
-            Vector2 nextvec = dirvec.normalized * speed * Time.deltaTime; // 이동
-
-
-            rigid.MovePosition(rigid.position + nextvec);
-            rigid.linearVelocity = Vector2.zero; // 관성 0
-
-            if (dirvec.x < 0)
-            {
-                sprite.flipX = true;
-            }
-            else
-                sprite.flipX = false;
+            Attack();
+            return;
         }
+        *///위에서 공격하는것도 고려했음
+        Vector2 diff = etarget.position - rigid.position;
+
+        if (Mathf.Abs(diff.x) < attackRangeX &&
+            Mathf.Abs(diff.y) < attackRangeY)
+        {
+            Attack();
+        }
+        //공격
+
+        Vector2 dirvec = etarget.position - rigid.position; // 방향
+        Vector2 nextvec = dirvec.normalized * speed * Time.deltaTime; // 이동
+
+
+        rigid.MovePosition(rigid.position + nextvec);
+        rigid.linearVelocity = Vector2.zero; // 관성 0
+
+        if (dirvec.x < 0)
+       {
+            sprite.flipX = true;
+        }
+        else
+            sprite.flipX = false;
+        
     }
 
+    public void Attack()
+    {
+        is_attack = true;
+
+        attackTimer = attackCooldown;
+
+        Vector2 dir = (etarget.position - rigid.position).normalized; // 방향잡고
+
+        GameObject bite = Gamemanager.Instance.pool.Get(1); // 이펙트 생성
+
+        bite.transform.position = rigid.position + dir * 0.7f; // 플레이어 방향으로 소환
+
+        anima.speed = 0;
+
+        rigid.constraints = RigidbodyConstraints2D.FreezePosition |
+                        RigidbodyConstraints2D.FreezeRotation; // 움직이지 않게 얼리는것!
+
+    }
     private void Update()
     {
-        
+        if (attackTimer > 0)
+        {
+            attackTimer -= Time.deltaTime;
+
+            if (attackTimer <= 0)
+            {
+                is_attack = false;
+                rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
+                anima.speed = 1;
+            }
+        }
     }
 
 
