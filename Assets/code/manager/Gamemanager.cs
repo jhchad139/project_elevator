@@ -4,6 +4,7 @@ public class Gamemanager : MonoBehaviour
 {
     public static Gamemanager Instance;
     public Player player;
+    public player_status status;
     public Poolmanager pool;
     public Choicemanager choice;
     public Floormanager floor;

@@ -5,7 +5,7 @@ using UnityEngine.Rendering.Universal;
 public class Enemy : MonoBehaviour
 {
 
-    public float speed;
+    public float speed = 1;
     public Rigidbody2D etarget;
     public int hp;
     public int maxHp = 10;
@@ -13,10 +13,12 @@ public class Enemy : MonoBehaviour
     [Header("Attack")]
     public float attackRangeX = 1f;
     public float attackRangeY = 1.5f;
-    public float attackCooldown = 1f;
+    public float attackTime = 0.6f;
+    public float attTimer = 0;
 
-    bool is_attack = false;
-    float attackTimer = 0f;
+    public bool is_attack = false;
+    public bool can_attack = true;
+    public float attackCooldown=3f;
 
     public bool is_dead = false;
 
@@ -55,9 +57,9 @@ public class Enemy : MonoBehaviour
         if (is_attack)
         {
             rigid.linearVelocity = Vector2.zero;
+            anima.speed = 0;
             return;
         }
-
 
         //위에서 공격하는것도 고려했음
         Vector2 diff = etarget.position - rigid.position;
@@ -65,16 +67,20 @@ public class Enemy : MonoBehaviour
         if (Mathf.Abs(diff.x) < attackRangeX &&
             Mathf.Abs(diff.y) < attackRangeY)
         {
+            if (!Gamemanager.Instance.status.isDead)
             Attack();
         }
-        //공격
 
+
+
+
+        //움직임
         Vector2 dirvec = etarget.position - rigid.position; // 방향
         Vector2 nextvec = dirvec.normalized * speed * Time.deltaTime; // 이동
 
-
         rigid.MovePosition(rigid.position + nextvec);
         rigid.linearVelocity = Vector2.zero; // 관성 0
+        anima.speed = 1;
 
         if (dirvec.x < 0)
        {
@@ -88,9 +94,9 @@ public class Enemy : MonoBehaviour
     public void Attack()
     {
         if (is_attack) return;
+        if (!can_attack) return;
         is_attack = true;
-        rigid.linearVelocity = Vector2.zero;
-        attackTimer = attackCooldown;
+        can_attack = false;
 
         Vector2 dir = (etarget.position - rigid.position).normalized; // 방향잡고
 
@@ -98,24 +104,24 @@ public class Enemy : MonoBehaviour
 
         bite.transform.position = rigid.position + dir * 0.7f; // 플레이어 방향으로 소환
 
-        anima.speed = 0;
+       
 
-        //rigid.constraints = RigidbodyConstraints2D.FreezePosition |
-        //    RigidbodyConstraints2D.FreezeRotation; // 움직이지 않게 얼리는것!
-        rigid.linearVelocity = Vector2.zero;
 
     }
     private void Update()
-    {
-        if (attackTimer > 0)
+    { 
+        if (!can_attack)
         {
-            attackTimer -= Time.deltaTime;
+            attTimer += Time.deltaTime;
 
-            if (attackTimer <= 0)
+            if (attTimer > attackTime)
             {
                 is_attack = false;
-                rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
-                anima.speed = 1;
+            }
+            if (attTimer > attackCooldown)
+            {
+                can_attack = true;
+                attTimer = 0;
             }
         }
     }

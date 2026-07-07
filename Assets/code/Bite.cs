@@ -4,7 +4,7 @@ public class Bite : MonoBehaviour
 {
     public int damage = 10;
     public float damageTime = 0f;
-    public float lifeTime = 1f; // 일단 좀비랑 똑같이 맞춰
+    public float lifeTime = 0.6f; // 일단 좀비랑 똑같이 맞춰
 
     bool hit = false; //한번만 뎀지주려고
 

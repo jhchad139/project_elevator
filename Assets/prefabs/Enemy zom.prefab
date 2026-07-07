@@ -199,6 +199,10 @@ MonoBehaviour:
   maxHp: 10
   attackRangeX: 1
   attackRangeY: 1.5
-  attackCooldown: 1
+  attackTime: 0.6
+  attTimer: 0
+  is_attack: 0
+  can_attack: 1
+  attackCooldown: 3
   is_dead: 0
   is_knockback: 0

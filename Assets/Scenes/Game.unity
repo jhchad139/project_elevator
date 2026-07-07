@@ -1910,8 +1910,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 95285ebd25890ff41bb7f35f570d3976, type: 2}
+  m_sharedMaterial: {fileID: -1888449309315038114, guid: 95285ebd25890ff41bb7f35f570d3976, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2268,8 +2268,8 @@ GameObject:
   - component: {fileID: 613478691}
   - component: {fileID: 613478692}
   - component: {fileID: 613478685}
-  - component: {fileID: 613478690}
   - component: {fileID: 613478693}
+  - component: {fileID: 613478694}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2427,28 +2427,6 @@ Transform:
   - {fileID: 1122195982}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &613478690
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613478684}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 042b1279d715ae84fb97b32b530e052d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &613478691
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2546,11 +2524,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::player_status
   maxHp: 100
   hp: 0
+  isDead: 0
   maxdashCount: 5
   dashCount: 0
   ammo: 6
   max_ammo: 6
   bullet_count: 10
+--- !u!95 &613478694
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613478684}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 042b1279d715ae84fb97b32b530e052d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &627355302
 GameObject:
   m_ObjectHideFlags: 0
@@ -3014,6 +3015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gamemanager
   player: {fileID: 613478685}
+  status: {fileID: 613478693}
   pool: {fileID: 1025683192}
   choice: {fileID: 835036503}
   floor: {fileID: 1598112245}
@@ -5112,7 +5114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Poolmanager
   prefabs:
   - {fileID: 2951805250307084978, guid: 0577f87984e2a9e45b3e3216a9b18f17, type: 3}
-  - {fileID: 1632782882969600836, guid: 154c3d4286e878141be72769b57fe0da, type: 3}
+  - {fileID: 2779302018821983082, guid: 154c3d4286e878141be72769b57fe0da, type: 3}
   - {fileID: 5427375927171171850, guid: bccc0144afd3f604695397b12f0da047, type: 3}
 --- !u!4 &1025683193
 Transform:
@@ -6446,8 +6448,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 95285ebd25890ff41bb7f35f570d3976, type: 2}
+  m_sharedMaterial: {fileID: -1888449309315038114, guid: 95285ebd25890ff41bb7f35f570d3976, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8143,7 +8145,7 @@ SceneRoots:
   - {fileID: 534503894}
   - {fileID: 635601766}
   - {fileID: 163292430}
-  - {fileID: 1856161445374039823}
   - {fileID: 1505689466}
   - {fileID: 1647155889}
   - {fileID: 495138968}
+  - {fileID: 1856161445374039823}

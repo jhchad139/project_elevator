@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (isDashing == false)
+        if (isDashing == false && status.isDead == false)
         {
             Vector2 movevec = inputvec.normalized * speed * Time.deltaTime;
 
@@ -75,6 +75,12 @@ public class Player : MonoBehaviour
         {
             Vector2 dashmovevec = dashvec * dashSpeed * Time.deltaTime;
             rigid.MovePosition(rigid.position + dashmovevec);
+        }
+        
+        if (status.isDead)
+        {
+            rigid.constraints = RigidbodyConstraints2D.FreezePosition |
+                                RigidbodyConstraints2D.FreezeRotation; 
         }
 
     }
@@ -242,5 +248,13 @@ public class Player : MonoBehaviour
         Time.timeScale = 0.05f;
         yield return new WaitForSecondsRealtime(0.1f);
         Time.timeScale = 1f;
+    }
+
+    //Á×À½ °ü·Ã
+    public void PlayerDead()
+    {
+        if (!status.isDead)
+            return;
+        anima.SetTrigger("dead");
     }
 }
