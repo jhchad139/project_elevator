@@ -7,6 +7,7 @@ public class player_status : MonoBehaviour
     public int maxHp = 100;
     public int hp;
 
+    public bool isDead = false;
     public int maxdashCount = 3;
     public int dashCount;
 
@@ -14,10 +15,13 @@ public class player_status : MonoBehaviour
     public int max_ammo = 6;
 
     public int bullet_count = 0;
+
+    
     void Awake()
     {
         hp = maxHp;
         dashCount = maxdashCount;
+        isDead = false;
     }
 
     private void Update()
@@ -50,11 +54,20 @@ public class player_status : MonoBehaviour
             hp = maxHp;
 
         if (hp <= 0)
+        {
             hp = 0;
+            isDead = true;
+            Gamemanager.Instance.player.PlayerDead();
+        }
+
+        if (n < 0)
+        {
+            Gamemanager.Instance.player.HitEffect();
+        }
         // 뭐 나중에 비활성화 로직을 넣던 하자구용
     }
 
-  
+    
 
     
 }

@@ -5,11 +5,20 @@ using UnityEngine.Rendering.Universal;
 public class Enemy : MonoBehaviour
 {
 
-    public float speed;
+    public float speed = 1;
     public Rigidbody2D etarget;
     public int hp;
     public int maxHp = 10;
 
+    [Header("Attack")]
+    public float attackRangeX = 1f;
+    public float attackRangeY = 1.5f;
+    public float attackTime = 0.6f;
+    public float attTimer = 0;
+
+    public bool is_attack = false;
+    public bool can_attack = true;
+    public float attackCooldown=3f;
 
     public bool is_dead = false;
 
@@ -39,27 +48,82 @@ public class Enemy : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (!is_knockback)
+        if (is_dead)
+            return;
+
+        if (is_knockback)
+            return;
+
+        if (is_attack)
         {
-            Vector2 dirvec = etarget.position - rigid.position; // 방향
-            Vector2 nextvec = dirvec.normalized * speed * Time.deltaTime; // 이동
-
-
-            rigid.MovePosition(rigid.position + nextvec);
-            rigid.linearVelocity = Vector2.zero; // 관성 0
-
-            if (dirvec.x < 0)
-            {
-                sprite.flipX = true;
-            }
-            else
-                sprite.flipX = false;
+            rigid.linearVelocity = Vector2.zero;
+            anima.speed = 0;
+            return;
         }
+
+        //위에서 공격하는것도 고려했음
+        Vector2 diff = etarget.position - rigid.position;
+
+        if (Mathf.Abs(diff.x) < attackRangeX &&
+            Mathf.Abs(diff.y) < attackRangeY)
+        {
+            if (!Gamemanager.Instance.status.isDead)
+            Attack();
+        }
+
+
+
+
+        //움직임
+        Vector2 dirvec = etarget.position - rigid.position; // 방향
+        Vector2 nextvec = dirvec.normalized * speed * Time.deltaTime; // 이동
+
+        rigid.MovePosition(rigid.position + nextvec);
+        rigid.linearVelocity = Vector2.zero; // 관성 0
+        anima.speed = 1;
+
+        if (dirvec.x < 0)
+       {
+            sprite.flipX = true;
+        }
+        else
+            sprite.flipX = false;
+        
     }
 
-    private void Update()
+    public void Attack()
     {
-        
+        if (is_attack) return;
+        if (!can_attack) return;
+        is_attack = true;
+        can_attack = false;
+
+        Vector2 dir = (etarget.position - rigid.position).normalized; // 방향잡고
+
+        GameObject bite = Gamemanager.Instance.pool.Get(1); // 이펙트 생성
+
+        bite.transform.position = rigid.position + dir * 0.7f; // 플레이어 방향으로 소환
+
+       
+
+
+    }
+    private void Update()
+    { 
+        if (!can_attack)
+        {
+            attTimer += Time.deltaTime;
+
+            if (attTimer > attackTime)
+            {
+                is_attack = false;
+            }
+            if (attTimer > attackCooldown)
+            {
+                can_attack = true;
+                attTimer = 0;
+            }
+        }
     }
 
 

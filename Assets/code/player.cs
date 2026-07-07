@@ -1,6 +1,8 @@
+using System.Collections;
 using Unity.VisualScripting.InputSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 
 public class Player : MonoBehaviour
 {   //player 기능 구현
@@ -63,7 +65,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (isDashing == false)
+        if (isDashing == false && status.isDead == false)
         {
             Vector2 movevec = inputvec.normalized * speed * Time.deltaTime;
 
@@ -73,6 +75,12 @@ public class Player : MonoBehaviour
         {
             Vector2 dashmovevec = dashvec * dashSpeed * Time.deltaTime;
             rigid.MovePosition(rigid.position + dashmovevec);
+        }
+        
+        if (status.isDead)
+        {
+            rigid.constraints = RigidbodyConstraints2D.FreezePosition |
+                                RigidbodyConstraints2D.FreezeRotation; 
         }
 
     }
@@ -190,7 +198,8 @@ public class Player : MonoBehaviour
             else
                 return;
         }
- 
+
+        CameraShake.Instance.Shake(0);
         is_firecool = true;
         firetimeronoff = true;
 
@@ -207,6 +216,7 @@ public class Player : MonoBehaviour
         }
 
         bullet.GetComponent<bullet>().init(dir);
+        
         status.ammo--;
         
     }
@@ -219,5 +229,32 @@ public class Player : MonoBehaviour
         status.ammo += load;
         status.bullet_count -= load;
         is_reroading = false;
+    }
+
+    public void HitEffect()
+    {
+        CameraShake.Instance.Shake(1);
+        StartCoroutine(HitSprite());
+        StartCoroutine(HitStop());
+    }
+    IEnumerator HitSprite()
+    { 
+        sprite.color = new Color(1f, 0.6f, 0.6f, 1f);
+        yield return new WaitForSeconds(0.1f);
+        sprite.color = Color.white;
+    }
+    IEnumerator HitStop()
+    {
+        Time.timeScale = 0.05f;
+        yield return new WaitForSecondsRealtime(0.1f);
+        Time.timeScale = 1f;
+    }
+
+    //죽음 관련
+    public void PlayerDead()
+    {
+        if (!status.isDead)
+            return;
+        anima.SetTrigger("dead");
     }
 }
