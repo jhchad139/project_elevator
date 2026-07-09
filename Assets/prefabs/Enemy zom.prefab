@@ -196,7 +196,7 @@ MonoBehaviour:
   speed: 1
   etarget: {fileID: 0}
   hp: 0
-  maxHp: 10
+  maxHp: 6
   attackRangeX: 1
   attackRangeY: 1.5
   attackTime: 0.6

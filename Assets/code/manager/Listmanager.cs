@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Listmanager : MonoBehaviour
@@ -22,11 +23,24 @@ public class Listmanager : MonoBehaviour
         public int maxhpchange;
         public int dashcountchange;
 
-        public int monsterNumber;
+        public int monsterNumber; // 풀 번호 입력하면 됨, 지금은 2가 좀비 
 
-        public int giveAmmo;
+        public int ammochange;
 
-        public bool skip;
+        public int triggerChance; // 1~100, 확률임.
+
+        public FailOption Fail; // 실패하면 
+        
+        [System.Serializable]
+        public class FailOption
+        {
+            public int failMaxHpChange;
+            public int failHpChange;
+            public int failDashChange;
+            public int failMonster;
+            public int failAmmo;
+        }
+
 
     } // 버튼 클릭 시 변화하는 머시깽이들
 
