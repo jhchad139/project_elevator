@@ -3,7 +3,7 @@ using UnityEngine;
 public class Floormanager : MonoBehaviour
 {
     public int currentFloor = 1;
-    public int maxFloor = 5;
+    public int maxFloor;
 
     public bool isTopfloor = false;
 
@@ -23,5 +23,12 @@ public class Floormanager : MonoBehaviour
     public void Top_floor()
     {
         isTopfloor = true;
+    }
+
+    public bool IsSpecial()
+    {
+        if (currentFloor % 3  == 0)
+            return true;
+        return false;
     }
 }

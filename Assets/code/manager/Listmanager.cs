@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Listmanager : MonoBehaviour
 {
-    public List<ChoiceSet> ChoiceSetl;
+    public List<ChoiceSet> normalChoiceSet;
+    public List<ChoiceSet> specialChoiceSet;
 
     [System.Serializable]
     public class ChoiceSet // 선택지 총괄
@@ -22,10 +23,12 @@ public class Listmanager : MonoBehaviour
         public int hpchange;
         public int maxhpchange;
         public int dashcountchange;
+        public int ammochange;
 
         public int monsterNumber; // 풀 번호 입력하면 됨, 지금은 2가 좀비 
+        public int mapNumber; // 맵 번호. 0이 기본맵임. 지금은 초록이 기본맵
 
-        public int ammochange;
+        
 
         public int triggerChance; // 1~100, 확률임.
 
@@ -46,9 +49,14 @@ public class Listmanager : MonoBehaviour
 
    
 
-    public ChoiceSet GetRandomChoiceSet() // 관리중인 리스트중 i번째 인덱스 추출
+    public ChoiceSet GetNormalChoiceSet() // 관리중인 리스트중 i번째 인덱스 추출
     {
-        int i = Random.Range(0, ChoiceSetl.Count);
-        return ChoiceSetl[i];
-    } 
+        int i = Random.Range(0, normalChoiceSet.Count);
+        return normalChoiceSet[i];
+    }
+    public ChoiceSet GetSpecialChoiceSet() // 관리중인 리스트중 i번째 인덱스 추출
+    {
+        int i = Random.Range(0, specialChoiceSet.Count);
+        return specialChoiceSet[i];
+    }
 }

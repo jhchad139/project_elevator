@@ -10,6 +10,8 @@ public class Gamemanager : MonoBehaviour
     public Floormanager floor;
     public Listmanager list;
     public Enemymanager monster;
+    public Mapmanager map;
+    public MapPoolmanager mappool;
     
 
     void Awake()

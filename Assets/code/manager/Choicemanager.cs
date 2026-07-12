@@ -71,19 +71,27 @@ public class Choicemanager : MonoBehaviour
          // 조건 만족을 하면 판넬이 꺼진 상태
         choicePanel.SetActive(true);
 
-        Now_list = Gamemanager.Instance.list.GetRandomChoiceSet();
+        /*
+        Now_list = Gamemanager.Instance.list.GetNormalChoiceSet();
         if (Now_list == null)
             return;
-        
+        */
+
+        if (Gamemanager.Instance.floor.IsSpecial())
+            Now_list = Gamemanager.Instance.list.GetSpecialChoiceSet();
+        else
+            Now_list = Gamemanager.Instance.list.GetNormalChoiceSet();
+
+        if (Now_list == null)
+            return;
+
         lefttxt.text = Now_list.left.text;
         righttxt.text = Now_list.right.text;
         
-
-       
     }
 
     /// <summary>
-    /// 
+    /// choice ui
     /// </summary>
     public void Offchoice()
     {
@@ -115,6 +123,9 @@ public class Choicemanager : MonoBehaviour
         can_choice=true;
     }
 
+    /// <summary>
+    /// 선택지 적용
+    /// </summary>
     void ApplyOption(int hp, int maxHp, int dash, int monster, int ammo)
     {
         if (hp != 0)
@@ -133,7 +144,10 @@ public class Choicemanager : MonoBehaviour
             status.bullet_count += ammo;
     } // 새로운 변수 n이 들어온다면, 같은 방식으로
 
-
+    void ApplyMap(int map)
+    {
+       Gamemanager.Instance.map.LoadMap(map);
+    }
     void ActionChoice(ChoiceOption option) // left, right의 형식으로 들어오니까
     {
         
@@ -152,6 +166,7 @@ public class Choicemanager : MonoBehaviour
             option.monsterNumber,
             option.ammochange
             );
+            ApplyMap(option.mapNumber);
         }
         else if (option.Fail != null)
         {
