@@ -4,33 +4,39 @@ public class player_status : MonoBehaviour
 {
     //player의 자원을 관리
     // 회복 , 피해, 대쉬, 탄약? 등등
-    public int maxHp = 100;
+    public int maxHp ;
     public int hp;
 
-    public bool isDead = false;
-    public int maxdashCount = 3;
+    
+    public int maxdashCount;
     public int dashCount;
 
     public int ammo = 0;
     public int max_ammo = 6;
 
-    public int bullet_count = 0;
+    public int bullet_count;
 
-    
+    public bool isDead = false;
+
     void Awake()
-    {
-        
-        hp = maxHp;
-        dashCount = maxdashCount;
-        isDead = false;
-    }
-
-    private void Start()
     {
         if (Gamemanager.Instance != null)
         {
             Gamemanager.Instance.status = this;
         }
+        
+    }
+
+    private void Start()
+    {
+        maxHp = Gamemanager.Instance.startMaxHp;
+        hp = maxHp;
+
+        maxdashCount = Gamemanager.Instance.startMaxDash;
+        dashCount = maxdashCount;
+
+        bullet_count = Gamemanager.Instance.startBulletCount;
+        isDead = false;
     }
 
     private void Update()

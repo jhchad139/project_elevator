@@ -51,12 +51,7 @@ public class Player : MonoBehaviour
     bool firetimeronoff = false; // 타이머 돌고있니?
     public bool is_reroading = false;
 
-    //테스트 씬이동
-    public void Start_Game()
-    {
-        SceneManager.LoadScene("Game");
-    }
-
+    
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();

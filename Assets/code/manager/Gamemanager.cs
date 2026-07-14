@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Gamemanager : MonoBehaviour
 {
@@ -12,10 +13,26 @@ public class Gamemanager : MonoBehaviour
     public Enemymanager monster;
     public Mapmanager map;
     public MapPoolmanager mappool;
-    
+
+
+    public int baseMaxHp = 100;
+    public int baseMaxDash = 5;
+    public int baseBulletCount = 10;
+
+    public int startMaxHp;
+    public int startMaxDash;
+    public int startBulletCount;
+
+
+    //테스트 씬이동
+    public void Test_elevatorstart()
+    {
+        SceneManager.LoadScene("Game");
+    }
 
     void Awake()
     {
+        ResetStartData();
         if (Instance == null)
         {
             Instance = this;
@@ -28,12 +45,19 @@ public class Gamemanager : MonoBehaviour
     }
     void Start()
     {
-        // 체력 설정 해줄거임
+        
+        
     }
 
-    
     void Update()
     {
         //게임타임 설정 해줄거임
+    }
+
+    public void ResetStartData()
+    {
+        startMaxHp = baseMaxHp;
+        startMaxDash = baseMaxDash;
+        startBulletCount = baseBulletCount;
     }
 }

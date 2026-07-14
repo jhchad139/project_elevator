@@ -3021,12 +3021,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::player_status
   maxHp: 100
   hp: 0
-  isDead: 0
   maxdashCount: 5
   dashCount: 0
-  ammo: 6
+  ammo: 0
   max_ammo: 6
-  bullet_count: 10
+  bullet_count: 0
+  isDead: 0
 --- !u!95 &613478694
 Animator:
   serializedVersion: 7
@@ -4153,6 +4153,12 @@ MonoBehaviour:
   monster: {fileID: 0}
   map: {fileID: 0}
   mappool: {fileID: 0}
+  baseMaxHp: 100
+  baseMaxDash: 5
+  baseBulletCount: 10
+  startMaxHp: 0
+  startMaxDash: 0
+  startBulletCount: 0
 --- !u!4 &680662129
 Transform:
   m_ObjectHideFlags: 0
