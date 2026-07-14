@@ -19,6 +19,14 @@ public class MapPoolmanager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (Gamemanager.Instance != null)
+        {
+            Gamemanager.Instance.mappool = this;
+        }
+    }
+
     public GameObject Get(int index)
     {
         GameObject select = null;

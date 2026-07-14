@@ -4,6 +4,13 @@ public class Enemymanager : MonoBehaviour
 {
     public GameObject spawnpoint;
 
+    private void Start()
+    {
+        if (Gamemanager.Instance != null)
+        {
+            Gamemanager.Instance.monster = this;
+        }
+    }
 
     public void Summon(int n)
     {

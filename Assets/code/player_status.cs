@@ -19,9 +19,18 @@ public class player_status : MonoBehaviour
     
     void Awake()
     {
+        
         hp = maxHp;
         dashCount = maxdashCount;
         isDead = false;
+    }
+
+    private void Start()
+    {
+        if (Gamemanager.Instance != null)
+        {
+            Gamemanager.Instance.status = this;
+        }
     }
 
     private void Update()

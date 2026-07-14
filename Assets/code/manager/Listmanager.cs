@@ -49,6 +49,14 @@ public class Listmanager : MonoBehaviour
 
    
 
+    private void Start()
+    {
+        if (Gamemanager.Instance != null)
+        {
+            Gamemanager.Instance.list = this;
+        }
+    }
+
     public ChoiceSet GetNormalChoiceSet() // 관리중인 리스트중 i번째 인덱스 추출
     {
         int i = Random.Range(0, normalChoiceSet.Count);

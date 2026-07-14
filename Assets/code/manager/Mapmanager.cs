@@ -4,7 +4,15 @@ public class Mapmanager : MonoBehaviour
 {
 
     public GameObject curruntMap;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private void Start()
+    {
+        if (Gamemanager.Instance != null)
+        {
+            Gamemanager.Instance.map = this;
+        }
+    }
+
     public void LoadMap(int n)
     {
         DisableMap();

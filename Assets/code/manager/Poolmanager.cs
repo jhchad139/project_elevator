@@ -18,6 +18,14 @@ public class Poolmanager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (Gamemanager.Instance != null)
+        {
+            Gamemanager.Instance.pool = this;
+        }
+    }
+
     public GameObject Get(int index)
     {
         GameObject select = null;

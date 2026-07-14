@@ -36,10 +36,14 @@ public class Choicemanager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-       choicePanel.SetActive(false);
+        if (Gamemanager.Instance != null)
+        {
+            Gamemanager.Instance.choice = this;
+        }
+
+        choicePanel.SetActive(false);
         leftchoice.onClick.AddListener(SelectL); // 클릭했을때 기능
         rightchoice.onClick.AddListener(SelectR); // 클릭했을때 기능
-       
     }
 
   // 나중에 옮길거임 확인

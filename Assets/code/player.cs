@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting.InputSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 
 public class Player : MonoBehaviour
@@ -50,8 +51,11 @@ public class Player : MonoBehaviour
     bool firetimeronoff = false; // 타이머 돌고있니?
     public bool is_reroading = false;
 
-    
-
+    //테스트 씬이동
+    public void Start_Game()
+    {
+        SceneManager.LoadScene("Game");
+    }
 
     void Awake()
     {
@@ -59,6 +63,14 @@ public class Player : MonoBehaviour
         anima = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         status = GetComponent<player_status>();
+    }
+
+    private void Start()
+    {
+        if (Gamemanager.Instance != null)
+        {
+            Gamemanager.Instance.player = this;
+        }
     }
 
     // Update is called once per frame

@@ -7,6 +7,14 @@ public class Floormanager : MonoBehaviour
 
     public bool isTopfloor = false;
 
+    private void Start()
+    {
+        if (Gamemanager.Instance != null)
+        {
+            Gamemanager.Instance.floor = this;
+        }
+    }
+
     public void CompleteChoice()
     {
         if (isTopfloor)
