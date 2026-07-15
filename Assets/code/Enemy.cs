@@ -175,7 +175,7 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         is_dead = true;
-        Gamemanager.Instance.player.target = null;
+        //Gamemanager.Instance.player.target = null;
         gameObject.SetActive(false);
         
         

@@ -5,6 +5,9 @@ public class Mapmanager : MonoBehaviour
 
     public GameObject curruntMap;
 
+    public GameObject elevatorWall;
+
+    public Animator elevator;
     private void Start()
     {
         if (Gamemanager.Instance != null)
@@ -25,5 +28,22 @@ public class Mapmanager : MonoBehaviour
             return;
         curruntMap.SetActive(false);
         curruntMap = null;
+    }
+
+    public void OpenElevator()
+    {
+         elevator.SetBool("isOpen", true);
+         Invoke("OpenWall", 0.5f);
+    }
+
+    void OpenWall()
+    {
+        elevatorWall.SetActive(false);
+    }
+
+    public void CloseElevator()
+    {
+        elevatorWall.SetActive(true);
+        elevator.SetBool("isOpen", false);
     }
 }

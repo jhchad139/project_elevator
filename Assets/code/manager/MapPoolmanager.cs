@@ -7,6 +7,7 @@ public class MapPoolmanager : MonoBehaviour
 
     public Transform mapSpawnpoint;
 
+    
     List<GameObject>[] pools; // ¼±¾ð
 
     private void Awake()

@@ -117,11 +117,28 @@ public class Choicemanager : MonoBehaviour
     {
         choicePanel.SetActive(false);
         can_choice = false;
-
         trigger.first = false;
-        Invoke("Enablechoice",1f); //5초 뒤에 ""함수 실행
+
+        //Invoke("Enablechoice",1f); //5초 뒤에 ""함수 실행
     }
 
+    IEnumerator ElevatorChoice()
+    {
+        
+        if (Gamemanager.Instance.map.elevator.GetBool("isOpen"))
+        {
+            //띵~
+            Gamemanager.Instance.map.CloseElevator();
+        }
+        yield return new WaitForSeconds(0.5f);
+        CameraShake.Instance.Shake(2);
+        yield return new WaitForSeconds(1.8f);
+        //띵~
+        Gamemanager.Instance.map.OpenElevator();
+        yield return new WaitForSeconds(3f);
+        Enablechoice();
+
+    }
     void Enablechoice() // 누를수 있는 자격
     {
         can_choice=true;
@@ -186,6 +203,7 @@ public class Choicemanager : MonoBehaviour
 
 
         Gamemanager.Instance.floor.CompleteChoice();
+        StartCoroutine(ElevatorChoice());
         Endchoice();
     }
     /*
