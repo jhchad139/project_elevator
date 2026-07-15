@@ -31,7 +31,8 @@ public class Choicemanager : MonoBehaviour
     ChoiceSet Now_list; // Áö±Ý ¼±ÅÃµÈ ¸®½ºÆ® class
 
     //bool is_summon = false;
-    
+
+    int currentMapint;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -130,10 +131,11 @@ public class Choicemanager : MonoBehaviour
             //¶ò~
             Gamemanager.Instance.map.CloseElevator();
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         CameraShake.Instance.Shake(2);
         yield return new WaitForSeconds(1.8f);
         //¶ò~
+        ApplyMap(currentMapint);
         Gamemanager.Instance.map.OpenElevator();
         yield return new WaitForSeconds(3f);
         Enablechoice();
@@ -187,7 +189,7 @@ public class Choicemanager : MonoBehaviour
             option.monsterNumber,
             option.ammochange
             );
-            ApplyMap(option.mapNumber);
+            currentMapint = option.mapNumber;
         }
         else if (option.Fail != null)
         {

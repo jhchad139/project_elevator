@@ -49,7 +49,7 @@ using UnityEngine;
     IEnumerator ElevatorShake()
     {
         
-        for(int i = 0;i<12;i++)
+        for(int i = 0;i<10;i++)
         {
             impulse.GenerateImpulse(Vector2.down * 0.02f);
             yield return new WaitForSeconds(0.15f);

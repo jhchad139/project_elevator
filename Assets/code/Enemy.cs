@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
 
     public bool is_dead = false;
 
+    public float range = 6f;
 
     public bool is_knockback = false;
    
@@ -41,8 +42,8 @@ public class Enemy : MonoBehaviour
 
     void OnEnable()
     {
-        etarget = Gamemanager.Instance.player.GetComponent<Rigidbody2D>();
-        rigid.transform.position = Gamemanager.Instance.monster.spawnpoint.transform.position;
+        etarget = null;
+        //rigid.transform.position = Gamemanager.Instance.monster.spawnpoint.transform.position;
         hp = maxHp;
         is_dead = false;
     }
@@ -88,7 +89,9 @@ public class Enemy : MonoBehaviour
         }
         else
             sprite.flipX = false;
+
         
+
     }
 
     public void Attack()
@@ -109,7 +112,21 @@ public class Enemy : MonoBehaviour
 
     }
     private void Update()
-    { 
+    {
+        //Å¸°Ù 
+        if (etarget == null)
+        {
+            float dist = Vector2.Distance(rigid.position,
+                Gamemanager.Instance.player.transform.position);
+
+            if (dist <= range)
+            {
+                etarget = Gamemanager.Instance.player.GetComponent<Rigidbody2D>();
+            }
+
+            return;
+        }
+
         if (!can_attack)
         {
             attTimer += Time.deltaTime;
@@ -131,10 +148,11 @@ public class Enemy : MonoBehaviour
     //Ãæµ¹
     void OnTriggerEnter2D(Collider2D collision)
     {
-        
+       
         if (!collision.CompareTag("Bullet"))
             return;
-        damage(1);
+        bullet bullet = collision.GetComponent<bullet>();
+        damage(bullet.dmg);
         anima.SetTrigger("hit");
 
         // transformÀº º¤ÅÍ 3ÀÌ°í, rigid´Â º¤ÅÍ2¶ó¼­ Çü¸ÂÃã

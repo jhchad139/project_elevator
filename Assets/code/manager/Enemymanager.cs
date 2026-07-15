@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemymanager : MonoBehaviour
 {
-    public GameObject spawnpoint;
+    
 
     private void Start()
     {
@@ -12,9 +12,9 @@ public class Enemymanager : MonoBehaviour
         }
     }
 
-    public void Summon(int n)
+    public void Summon(int n,Transform point = default)
     {
             GameObject enemy = Gamemanager.Instance.pool.Get(n);
-            enemy.transform.position = spawnpoint.transform.position;
+            enemy.transform.position = point.position;
     }
 }

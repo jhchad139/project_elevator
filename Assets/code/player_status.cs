@@ -29,6 +29,10 @@ public class player_status : MonoBehaviour
 
     private void Start()
     {
+        if (Gamemanager.Instance != null)
+        {
+            Gamemanager.Instance.status = this;
+        }
         maxHp = Gamemanager.Instance.startMaxHp;
         hp = maxHp;
 

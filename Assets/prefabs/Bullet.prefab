@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::bullet
   speed: 30
+  dmg: 3
 --- !u!114 &9116806327273938949
 MonoBehaviour:
   m_ObjectHideFlags: 0
