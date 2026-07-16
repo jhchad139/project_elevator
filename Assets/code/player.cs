@@ -289,5 +289,6 @@ public class Player : MonoBehaviour
         if (!status.isDead)
             return;
         anima.SetTrigger("dead");
+        //게임오버 ui띄우기
     }
 }
