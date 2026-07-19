@@ -679,7 +679,7 @@ GameObject:
   - component: {fileID: 4639553776995169647}
   - component: {fileID: 7855167269712805380}
   m_Layer: 0
-  m_Name: Normalmap 1
+  m_Name: 0Normalmap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -221,7 +221,7 @@ public class Player : MonoBehaviour
                 return;
         }
 
-        
+        SoundManager.Instance.PlaySFX(0,1.5f);
         is_firecool = true;
         firetimeronoff = true;
 
@@ -289,6 +289,6 @@ public class Player : MonoBehaviour
         if (!status.isDead)
             return;
         anima.SetTrigger("dead");
-        //게임오버 ui띄우기
+        Gamemanager.Instance.ui.DeadCanva();
     }
 }

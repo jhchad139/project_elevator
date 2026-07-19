@@ -13,6 +13,7 @@ public class Gamemanager : MonoBehaviour
     public Enemymanager monster;
     public Mapmanager map;
     public MapPoolmanager mappool;
+    public Uimanager ui;
 
 
     public int baseMaxHp = 100;
