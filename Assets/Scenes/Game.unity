@@ -2586,7 +2586,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -708782465, guid: ee00d9f05034b5a48a377776fb706e2a, type: 3}
+  m_Sprite: {fileID: 894459288, guid: a81353a7ec4400343b98732083b93e30, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5204,7 +5204,7 @@ MonoBehaviour:
       dashcountchange: 0
       ammochange: 0
       monsterNumber: 0
-      mapNumber: 0
+      mapNumber: 3
       triggerChance: 0
       Fail:
         failMaxHpChange: 0
@@ -6918,6 +6918,7 @@ MonoBehaviour:
   - {fileID: 8741144637463038876, guid: d910aba759688af43b63f77930451569, type: 3}
   - {fileID: 4748341769171205948, guid: 0a7a6778e395e6b46b3c2943ae38a8ff, type: 3}
   - {fileID: 1829403445522514153, guid: 9cec746753c79f048b1a0a15a80abe1d, type: 3}
+  - {fileID: 4748341769171205948, guid: 7ed2efa7cd0d28b4086ecf9c8b3054b9, type: 3}
   mapSpawnpoint: {fileID: 1558793350}
 --- !u!1 &1915587057
 GameObject:
