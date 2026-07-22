@@ -4,6 +4,7 @@ public class bullet : MonoBehaviour
 {
 
     public float speed ;
+    public int dmg = 3;
 
     Vector2 btargetvec;
 

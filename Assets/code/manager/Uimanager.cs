@@ -1,8 +1,11 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class Uimanager : MonoBehaviour
 {
+    public GameObject playCanvas;
+    public GameObject gameoverCanvas;
 
     public TMP_Text hptxt;
     public TMP_Text floortxt;
@@ -18,7 +21,10 @@ public class Uimanager : MonoBehaviour
 
     private void Awake()
     {
-        
+        if (Gamemanager.Instance != null)
+        {
+            Gamemanager.Instance.ui = this;
+        }
     }
     private void Update()
     {
@@ -45,5 +51,27 @@ public class Uimanager : MonoBehaviour
             dashSlider.maxValue = status.maxdashCount;
 
         
+    }
+
+    public void DeadCanva()
+    {
+        playCanvas.SetActive(false);
+        gameoverCanvas.SetActive(true);
+    }
+
+    public void DeadContinue()
+    {
+        SceneManager.LoadScene("Town");
+    }
+
+    public void DeadExit()
+    {
+#if UNITY_EDITOR
+        //출시할때 삭제
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+
+        Application.Quit();
+#endif
     }
 }

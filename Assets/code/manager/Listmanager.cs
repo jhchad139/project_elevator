@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Listmanager : MonoBehaviour
 {
-    public List<ChoiceSet> ChoiceSetl;
+    public List<ChoiceSet> normalChoiceSet;
+    public List<ChoiceSet> specialChoiceSet;
 
     [System.Serializable]
     public class ChoiceSet // 선택지 총괄
@@ -21,20 +23,48 @@ public class Listmanager : MonoBehaviour
         public int hpchange;
         public int maxhpchange;
         public int dashcountchange;
+        public int ammochange;
 
-        public int monsterNumber;
+        public int monsterNumber; // 풀 번호 입력하면 됨, 지금은 2가 좀비 
+        public int mapNumber; // 맵 번호. 0이 기본맵임. 지금은 초록이 기본맵
 
-        public int giveAmmo;
+        
 
-        public bool skip;
+        public int triggerChance; // 1~100, 확률임.
+
+        public FailOption Fail; // 실패하면 
+        
+        [System.Serializable]
+        public class FailOption
+        {
+            public int failMaxHpChange;
+            public int failHpChange;
+            public int failDashChange;
+            public int failMonster;
+            public int failAmmo;
+        }
+
 
     } // 버튼 클릭 시 변화하는 머시깽이들
 
    
 
-    public ChoiceSet GetRandomChoiceSet() // 관리중인 리스트중 i번째 인덱스 추출
+    private void Start()
     {
-        int i = Random.Range(0, ChoiceSetl.Count);
-        return ChoiceSetl[i];
-    } 
+        if (Gamemanager.Instance != null)
+        {
+            Gamemanager.Instance.list = this;
+        }
+    }
+
+    public ChoiceSet GetNormalChoiceSet() // 관리중인 리스트중 i번째 인덱스 추출
+    {
+        int i = Random.Range(0, normalChoiceSet.Count);
+        return normalChoiceSet[i];
+    }
+    public ChoiceSet GetSpecialChoiceSet() // 관리중인 리스트중 i번째 인덱스 추출
+    {
+        int i = Random.Range(0, specialChoiceSet.Count);
+        return specialChoiceSet[i];
+    }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,7 +22,7 @@ public class Choicemanager : MonoBehaviour
     public TMP_Text paneltxt;
     public TMP_Text lefttxt;
     public TMP_Text righttxt; // 버튼의 텍스트
-    
+
 
     public player_status status;
 
@@ -30,15 +31,20 @@ public class Choicemanager : MonoBehaviour
     ChoiceSet Now_list; // 지금 선택된 리스트 class
 
     //bool is_summon = false;
-    
+
+    int currentMapint;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-       choicePanel.SetActive(false);
+        if (Gamemanager.Instance != null)
+        {
+            Gamemanager.Instance.choice = this;
+        }
+
+        choicePanel.SetActive(false);
         leftchoice.onClick.AddListener(SelectL); // 클릭했을때 기능
         rightchoice.onClick.AddListener(SelectR); // 클릭했을때 기능
-       
     }
 
   // 나중에 옮길거임 확인
@@ -55,7 +61,11 @@ public class Choicemanager : MonoBehaviour
         ActionChoice(Now_list.right);
     }
 
-    public void Openchoice()// 
+
+    Coroutine typingCrt; // 코루틴의 주소록, 실행중인 코루틴을 멈추려면, 주소가 필요함. 
+    //주소 없이 그냥 스탑코루틴 해버리면, 새로운 인자가 생성되어 오류가 난다고 함.
+
+    public void Openchoice()// 여기서 텍스트를 받기 때문에 , 여기서 출력 연출 하겠음.
     {
         if (can_choice != true)
             return;
@@ -66,14 +76,28 @@ public class Choicemanager : MonoBehaviour
          // 조건 만족을 하면 판넬이 꺼진 상태
         choicePanel.SetActive(true);
 
-        Now_list = Gamemanager.Instance.list.GetRandomChoiceSet();
+        /*
+        Now_list = Gamemanager.Instance.list.GetNormalChoiceSet();
+        if (Now_list == null)
+            return;
+        */
+
+        if (Gamemanager.Instance.floor.IsSpecial())
+            Now_list = Gamemanager.Instance.list.GetSpecialChoiceSet();
+        else
+            Now_list = Gamemanager.Instance.list.GetNormalChoiceSet();
+
         if (Now_list == null)
             return;
 
         lefttxt.text = Now_list.left.text;
         righttxt.text = Now_list.right.text;
+        
     }
 
+    /// <summary>
+    /// choice ui
+    /// </summary>
     public void Offchoice()
     {
         
@@ -94,47 +118,99 @@ public class Choicemanager : MonoBehaviour
     {
         choicePanel.SetActive(false);
         can_choice = false;
-
         trigger.first = false;
-        Invoke("Enablechoice",1f); //5초 뒤에 ""함수 실행
+
+        //Invoke("Enablechoice",1f); //5초 뒤에 ""함수 실행
     }
 
+    IEnumerator ElevatorChoice()
+    {
+        
+        if (Gamemanager.Instance.map.elevator.GetBool("isOpen"))
+        {
+            //띵~
+            Gamemanager.Instance.map.CloseElevator();
+        }
+        yield return new WaitForSeconds(1f);
+        CameraShake.Instance.Shake(2);
+        yield return new WaitForSeconds(1.8f);
+        //띵~
+        ApplyMap(currentMapint);
+        Gamemanager.Instance.map.OpenElevator();
+        yield return new WaitForSeconds(3f);
+        Enablechoice();
+
+    }
     void Enablechoice() // 누를수 있는 자격
     {
         can_choice=true;
     }
 
+    /// <summary>
+    /// 선택지 적용
+    /// </summary>
+    void ApplyOption(int hp, int maxHp, int dash, int monster, int ammo)
+    {
+        if (hp != 0)
+            status.Hp_change(hp);
+
+        if (maxHp != 0)
+            status.Max_hpchange(maxHp);
+
+        if (dash != 0)
+            status.dashCount += dash;
+
+        if (monster != 0)
+            Gamemanager.Instance.monster.Summon(monster);
+
+        if (ammo != 0)
+            status.bullet_count += ammo;
+    } // 새로운 변수 n이 들어온다면, 같은 방식으로
+
+    void ApplyMap(int map)
+    {
+       Gamemanager.Instance.map.LoadMap(map);
+    }
     void ActionChoice(ChoiceOption option) // left, right의 형식으로 들어오니까
     {
-        /*
-         리스트 구조
-        if ( listmanager에 있는 변수 > 0 )
-            heal이던 damage던 수정
-         >0이 아니라,, 무기지급 등 0/1 이면 bool변수 t/f 해주면 됨
-         */
+        
         if (option == null)
             return;
-        if (option.hpchange  != 0)
-            status.Hp_change(option.hpchange);
 
-        if (option.maxhpchange != 0)
-            status.Max_hpchange(option.maxhpchange);
+        int triggerRand = Random.Range(1, 100); // 확률비교변수
 
-        if (option.dashcountchange != 0)
-            status.dashCount += option.dashcountchange;
-
-        if (option.monsterNumber != 0)
+        if (option.triggerChance == 0 || option.triggerChance >= triggerRand)
         {
-            Gamemanager.Instance.monster.Summon(option.monsterNumber);
-            //is_summon = true;
+            //성공
+            ApplyOption(
+            option.hpchange,
+            option.maxhpchange,
+            option.dashcountchange,
+            option.monsterNumber,
+            option.ammochange
+            );
+            currentMapint = option.mapNumber;
         }
-        if (option.giveAmmo != 0)
+        else if (option.Fail != null)
         {
-            status.bullet_count += option.giveAmmo;
+            //실패
+            ApplyOption(
+            option.Fail.failHpChange,
+            option.Fail.failMaxHpChange,
+            option.Fail.failDashChange,
+            option.Fail.failMonster,
+            option.Fail.failAmmo
+            );
         }
 
 
-    Gamemanager.Instance.floor.CompleteChoice();
+        Gamemanager.Instance.floor.CompleteChoice();
+        StartCoroutine(ElevatorChoice());
         Endchoice();
     }
+    /*
+         함수 구조
+        어플라이옵션 함수에, 선택지의 변수값을 받아서 넘기고, 
+        어플라이옵션 함수 내부에서, 0이아니면 그 변수에 맞는 함수를 작동시키는 구조임
+     */
 }

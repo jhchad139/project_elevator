@@ -1,7 +1,9 @@
 using System.Collections;
 using Unity.VisualScripting.InputSystem;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 
 public class Player : MonoBehaviour
@@ -17,9 +19,10 @@ public class Player : MonoBehaviour
     public GameObject Bulletprefab;
 
     //타겟 설정
+    /*
     public Enemy target;
     Vector2 targetdir;
-
+    */
     Rigidbody2D rigid;
     Animator anima;
     SpriteRenderer sprite;
@@ -51,14 +54,20 @@ public class Player : MonoBehaviour
     public bool is_reroading = false;
 
     
-
-
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         anima = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         status = GetComponent<player_status>();
+    }
+
+    private void Start()
+    {
+        if (Gamemanager.Instance != null)
+        {
+            Gamemanager.Instance.player = this;
+        }
     }
 
     // Update is called once per frame
@@ -119,17 +128,28 @@ public class Player : MonoBehaviour
             firetimeronoff = false;
             is_firecool = false;
         }
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+            Fire();
+        }
+       
+       
 
-        
+
         //타겟
+        /*
         if(Mouse.current.leftButton.wasPressedThisFrame)
         {
             
             TargetSet();
         }
+        */ // 마우스 클릭으로 바꿀것
     }
 
-    void TargetSet()
+    /*
+     *void TargetSet()
     {
         Vector2 touchPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
@@ -148,6 +168,8 @@ public class Player : MonoBehaviour
         
         
     }
+    */
+
     void OnMove(InputValue value)
 
     {
@@ -199,7 +221,7 @@ public class Player : MonoBehaviour
                 return;
         }
 
-        CameraShake.Instance.Shake(0);
+        SoundManager.Instance.PlaySFX(0,1.5f);
         is_firecool = true;
         firetimeronoff = true;
 
@@ -207,13 +229,24 @@ public class Player : MonoBehaviour
 
         bullet.transform.position = Bulletsp.position;
 
-        Vector2 dir = Vector2.right;
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
+        mousePos += Vector2.down * 1.5f;
+        Vector2 dir = (mousePos - (Vector2)Bulletsp.position).normalized;
+
+       
+
+        CameraShake.Instance.Shake(0,dir);
+
+        //Vector2 dir = Vector2.right;
+
+        /* 타겟 방향계산 
         if (target != null)
         {
             Vector2 bulletdir = target.transform.position - Bulletsp.position;
             dir = bulletdir.normalized;
         }
+        */
 
         bullet.GetComponent<bullet>().init(dir);
         
@@ -256,5 +289,6 @@ public class Player : MonoBehaviour
         if (!status.isDead)
             return;
         anima.SetTrigger("dead");
+        Gamemanager.Instance.ui.DeadCanva();
     }
 }
