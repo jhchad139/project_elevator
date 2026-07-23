@@ -30,7 +30,7 @@ public class Uimanager : MonoBehaviour
     {
         //text
         hptxt.text = $"HP : {status.hp} / {status.maxHp}";
-        floortxt.text = $"Floor : {Gamemanager.Instance.floor.currentFloor}";
+        floortxt.text = $"{Gamemanager.Instance.floor.currentFloor}F";
         if (!player.is_reroading)
             ammotxt.text = $"{status.ammo} / {status.bullet_count}";
         else
