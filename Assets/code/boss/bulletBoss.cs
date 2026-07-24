@@ -1,15 +1,32 @@
 using UnityEngine;
+using System.Collections;
 
 public class bulletBoss : Bossbase // 보스
 {
     private void Start()
     {
-       
+        StartCoroutine(SpinCirclePattern());
     }
-    void Update()
+
+    IEnumerator SpinCirclePattern()
     {
-        
+        int i = 0;
+        while (true)
+        {
+
+
+
+            Circle(i);
+
+            i += 4;
+
+            yield return new WaitForSeconds(0.3f);
+            if (i > 100)
+                yield break;
+        }
     }
+
+
 
     void SpawnBullet(Vector2 dir, float speed)
     {
@@ -23,12 +40,12 @@ public class bulletBoss : Bossbase // 보스
         }
     }
 
-    public void CirclePattern()
+    public void Circle(int i = 0)
     {
-        for (int angle = 0; angle < 360; angle += 20)
+        for (int angle = i; angle < 360 + i; angle += 30)
         {
-            Vector2 dir = Quaternion.Euler(0, 0, angle) * Vector2.right;
-            SpawnBullet(dir, 5f);
+            Vector2 dir = Quaternion.Euler(0, 0, angle) * Vector2.right; // right방향벡터를 angle각도만큼 돌려달라는뜻
+            SpawnBullet(dir, 4f);
         }
     }
 }
