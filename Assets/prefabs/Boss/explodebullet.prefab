@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4232984185029230469}
   - component: {fileID: 1611517363234445687}
   - component: {fileID: 4513601668921145291}
-  - component: {fileID: 4148559342677503961}
+  - component: {fileID: 9007375837308577802}
   m_Layer: 0
-  m_Name: bossbullet
+  m_Name: explodebullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 8388464673661178745}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.88, y: 10.03, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: -10.94, y: 10.75, z: 0}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 7ac1c4c90e0aedb4897c487bf8a2fb6a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 37dda8603d1df1f42b79e3892cc35268, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -129,7 +129,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.5, y: 1}
   m_Direction: 0
 --- !u!50 &4513601668921145291
 Rigidbody2D:
@@ -158,7 +158,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4148559342677503961
+--- !u!114 &9007375837308577802
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0316c099befa6484ea2984ac1ae4d09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::bossbullet
-  damage: 5
-  speed: 5
-  isExplode: 0
+  damage: 20
+  speed: 30
+  isExplode: 1
   boss: {fileID: 4746179971312749353, guid: 536dbe74157c70a47a2ef33f1f37eb0b, type: 3}
