@@ -103,7 +103,7 @@ public class Enemy : MonoBehaviour
 
         Vector2 dir = (etarget.position - rigid.position).normalized; // 방향잡고
 
-        GameObject bite = Gamemanager.Instance.pool.Get(1); // 이펙트 생성
+        GameObject bite = Gamemanager.Instance.pool.normal.Get(1); // 이펙트 생성
 
         bite.transform.position = rigid.position + dir * 0.7f; // 플레이어 방향으로 소환
 

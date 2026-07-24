@@ -14,7 +14,7 @@ public class Enemymanager : MonoBehaviour
 
     public void Summon(int n,Transform point = default)
     {
-            GameObject enemy = Gamemanager.Instance.pool.Get(n);
+            GameObject enemy = Gamemanager.Instance.pool.normal.Get(n);
             enemy.transform.position = point.position;
     }
 }

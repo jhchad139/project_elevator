@@ -7,12 +7,12 @@ public class Gamemanager : MonoBehaviour
     public Player player;
     public player_status status;
     public Poolmanager pool;
+    public MapPoolmanager mappool;
     public Choicemanager choice;
     public Floormanager floor;
     public Listmanager list;
     public Enemymanager monster;
     public Mapmanager map;
-    public MapPoolmanager mappool;
     public Uimanager ui;
 
 

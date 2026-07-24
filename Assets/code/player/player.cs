@@ -225,7 +225,7 @@ public class Player : MonoBehaviour
         is_firecool = true;
         firetimeronoff = true;
 
-        GameObject bullet = Gamemanager.Instance.pool.Get(0);
+        GameObject bullet = Gamemanager.Instance.pool.normal.Get(0);
 
         bullet.transform.position = Bulletsp.position;
 
