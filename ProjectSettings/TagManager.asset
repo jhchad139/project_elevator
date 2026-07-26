@@ -8,6 +8,8 @@ TagManager:
   - Area
   - Enemy
   - Wall
+  - Elevator
+  - Interact
   layers:
   - Default
   - TransparentFX

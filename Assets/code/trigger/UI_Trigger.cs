@@ -4,24 +4,45 @@ public class UI_Trigger : MonoBehaviour
 {
     //가까이 오면 판넬 띄우는 코드
     public Choicemanager choicemanager; // 객체A를 B이름으로 써먹을거에요
+    public GameObject interact;
     public bool first = false;
-   
 
-   void OnTriggerEnter2D(Collider2D other)
+
+    InteractObject interactTarget;
+
+
+    private void Awake()
     {
-        if (other.CompareTag("Player"))
+        interactTarget = GetComponent<InteractObject>();
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (choicemanager)
         {
-            if (Gamemanager.Instance.floor.isTopfloor == true)
-                return;
-            if (Gamemanager.Instance.choice.can_choice == false)
-                return;
-            if (first == false) { 
-                choicemanager.Openchoice();
-                first = true;
-             }
-            else if (first ==true)
+            if (other.CompareTag("Player"))
+            {
+                if (Gamemanager.Instance.floor.isTopfloor == true)
+                    return;
+                if (Gamemanager.Instance.choice.can_choice == false)
+                    return;
+                if (first == false)
+                {
+                    choicemanager.Openchoice();
+                    first = true;
+                }
+                else if (first == true)
+
+                    choicemanager.Onchoice();
+            }
+        }
+        else if (interact)
+        {
+            if(other.CompareTag("Player"))
+            {
+                interact.SetActive(true);
+                Gamemanager.Instance.interact.SetTarget(interactTarget);
+            }
                 
-                choicemanager.Onchoice();
         }
     }
 
@@ -30,8 +51,17 @@ public class UI_Trigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            choicemanager.Offchoice();
+
+            if (interact != null && interact.activeSelf)
+            {
+                interact.SetActive(false);
+                Gamemanager.Instance.interact.ClearTarget();
+            }
+            else
+                choicemanager.Offchoice();
         }
+        
+
     }
 
 }

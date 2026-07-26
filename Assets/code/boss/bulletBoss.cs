@@ -7,7 +7,9 @@ public class bulletBoss : Bossbase // º¸½º
     private void Start()
     {
         //StartCoroutine(SpinCirclePattern());
-        ExplodePattern();
+        Invoke("ExplodePattern",1f);
+        
+
     }
     IEnumerator SpinCirclePattern()
     {

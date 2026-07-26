@@ -171,9 +171,13 @@ public class Player : MonoBehaviour
     */
 
     void OnMove(InputValue value)
-
     {
       inputvec = value.Get<Vector2>();
+    }
+    void OnInteract()
+    {
+        Gamemanager.Instance.interact.Interact();
+        
     }
 
     void LateUpdate()
