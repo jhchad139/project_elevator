@@ -10,6 +10,7 @@ TagManager:
   - Wall
   - Elevator
   - Interact
+  - Melee
   layers:
   - Default
   - TransparentFX

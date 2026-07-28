@@ -4,7 +4,7 @@ public class UI_Trigger : MonoBehaviour
 {
     //가까이 오면 판넬 띄우는 코드
     public Choicemanager choicemanager; // 객체A를 B이름으로 써먹을거에요
-    public GameObject interact;
+    
     public bool first = false;
 
 
@@ -35,11 +35,11 @@ public class UI_Trigger : MonoBehaviour
                     choicemanager.Onchoice();
             }
         }
-        else if (interact)
+        else
         {
             if(other.CompareTag("Player"))
             {
-                interact.SetActive(true);
+                Gamemanager.Instance.ui.canInteract.SetActive(true);
                 Gamemanager.Instance.interact.SetTarget(interactTarget);
             }
                 
@@ -52,9 +52,9 @@ public class UI_Trigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
 
-            if (interact != null && interact.activeSelf)
+            if (Gamemanager.Instance.ui.canInteract.activeSelf)
             {
-                interact.SetActive(false);
+                Gamemanager.Instance.ui.canInteract.SetActive(false);
                 Gamemanager.Instance.interact.ClearTarget();
             }
             else

@@ -211,6 +211,8 @@ public class Player : MonoBehaviour
     {
         if (is_firecool == true || is_reroading == true)
             return;
+
+        
         if (status.ammo <=0)
         {
             if (status.bullet_count > 0)
@@ -222,7 +224,10 @@ public class Player : MonoBehaviour
             }
 
             else
+            {
+                MeleeAttack();
                 return;
+            }
         }
 
         SoundManager.Instance.PlaySFX(0,1.5f);
@@ -258,6 +263,26 @@ public class Player : MonoBehaviour
         
     }
 
+    public void MeleeAttack()
+    {
+        //프리펩 소환
+
+        //위치 조정
+        //마우스 방향
+        //init 전달
+        GameObject bullet = Gamemanager.Instance.pool.normal.Get(3);
+
+        bullet.transform.position = Bulletsp.position;
+
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+        mousePos += Vector2.down * 1.5f;
+        Vector2 dir = (mousePos - (Vector2)Bulletsp.position).normalized;
+
+        bullet.transform.position = (Vector2)Bulletsp.position + (dir * 0.8f);
+
+        bullet.GetComponent<bullet>().init(dir);
+    }
     public void Reloading()
     {
         int need = status.max_ammo - status.ammo;

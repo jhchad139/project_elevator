@@ -8,11 +8,15 @@ public class bullet : MonoBehaviour
 
     Vector2 btargetvec;
 
+    SpriteRenderer sprite;
+
     private TrailRenderer trail; // TrailRenderer 참조 추가
 
     private void Awake()
     {
         trail = GetComponent<TrailRenderer>();
+        sprite = GetComponent<SpriteRenderer>();
+        // 근접태그라면 , 1초뒤 비활성화
     }
 
     private void OnEnable()
@@ -21,6 +25,10 @@ public class bullet : MonoBehaviour
         if (trail != null)
         {
             trail.Clear();
+        }
+        if (gameObject.CompareTag("Melee"))
+        {
+            Invoke("DisableAttack", 0.3f);
         }
     }
 
@@ -33,6 +41,10 @@ public class bullet : MonoBehaviour
             trail.Clear();
         }
 
+        if (gameObject.CompareTag("Melee"))
+        {
+            sprite.flipX = true;
+        }
         btargetvec = target.normalized;
         float angle = Mathf.Atan2(btargetvec.y, btargetvec.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
@@ -44,5 +56,8 @@ public class bullet : MonoBehaviour
         this.transform.Translate(btargetvec * speed * Time.deltaTime, Space.World);
     }
 
-
+    private void DisableAttack()
+    {
+        gameObject.SetActive(false);
+    }
 }

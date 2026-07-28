@@ -9,11 +9,12 @@ public class InteractObject : MonoBehaviour
 
         public int itemId;
 
-        public bool once;
-        public bool interacted;
+        public int itemvalue;
+
+       
     
 }
 public enum InteractType
 {
-    Npc, Item, Action
+    Npc, Item, Action , Hp , poop
 }

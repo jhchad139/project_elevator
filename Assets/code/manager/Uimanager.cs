@@ -7,6 +7,7 @@ public class Uimanager : MonoBehaviour
     public GameObject playCanvas;
     public GameObject gameoverCanvas;
     public GameObject interactCanvas;
+    public GameObject canInteract;
 
     public TMP_Text hptxt;
     public TMP_Text floortxt;
