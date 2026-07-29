@@ -11,6 +11,7 @@ public class bossbullet : MonoBehaviour // º¸½º°¡ ½î´Â Åº¸·
 
     public void Init(Vector2 dir, float speed)
     {
+       
         this.dir = dir.normalized;
         this.speed = speed;
     }
@@ -18,6 +19,15 @@ public class bossbullet : MonoBehaviour // º¸½º°¡ ½î´Â Åº¸·
     void Update()
     {
         this.transform.Translate(dir * speed * Time.deltaTime, Space.World);
+        
+        if (boss.isOrbit)
+        {
+            Debug.Log("a");
+            float baseAngle = gameObject.CompareTag("Reverse") ? -15f : 15f;
+
+            float rotateAngle = baseAngle * Time.deltaTime;
+            dir = Quaternion.Euler(0, 0, rotateAngle) * dir;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,8 +36,8 @@ public class bossbullet : MonoBehaviour // º¸½º°¡ ½î´Â Åº¸·
         {
             if (collision.gameObject.CompareTag("Wall"))
             {
-                boss.Circle(0, 3f, gameObject.transform);
-                boss.Circle(10, 3f, gameObject.transform);
+                boss.Circle(0, 0, 3f, gameObject.transform);
+                boss.Circle(0, 10, 3f, gameObject.transform);
                 gameObject.SetActive(false);
             }
         }
