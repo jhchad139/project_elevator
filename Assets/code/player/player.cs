@@ -18,11 +18,7 @@ public class Player : MonoBehaviour
     public Transform Bulletsp;
     public GameObject Bulletprefab;
 
-    //타겟 설정
-    /*
-    public Enemy target;
-    Vector2 targetdir;
-    */
+    
     Rigidbody2D rigid;
     Animator anima;
     SpriteRenderer sprite;
@@ -53,6 +49,9 @@ public class Player : MonoBehaviour
     bool firetimeronoff = false; // 타이머 돌고있니?
     public bool is_reroading = false;
 
+    // 근접 공격 관련 변수 /총은 계산, 근접공격은 코루틴 사용 할거임. 완성하고 보면서 반성 겸 공부하게
+    bool canMelee = true;
+    float meleeCooldown = 0.8f;
     
     void Awake()
     {
@@ -96,7 +95,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-
         //대쉬
         if (dashtimeronoff == true)
             dashTimer += Time.deltaTime;
@@ -134,52 +132,9 @@ public class Player : MonoBehaviour
                 return;
             Fire();
         }
-       
-       
-
-
-        //타겟
-        /*
-        if(Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            
-            TargetSet();
-        }
-        */ // 마우스 클릭으로 바꿀것
     }
 
-    /*
-     *void TargetSet()
-    {
-        Vector2 touchPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-
-        //클릭 위치가 실제 터치보다 위에서 판정되어 임시 보정값 적용
-        touchPos += Vector2.down * 1.5f;
-
-        Collider2D[] hits = Physics2D.OverlapCircleAll(touchPos,0.3f);
-        foreach (Collider2D hit in hits)
-        {
-            if (hit.CompareTag("Enemy"))
-            {
-                target = hit.GetComponent<Enemy>();
-                break;
-            }
-        }
-        
-        
-    }
-    */
-
-    void OnMove(InputValue value)
-    {
-      inputvec = value.Get<Vector2>();
-    }
-    void OnInteract()
-    {
-        Gamemanager.Instance.interact.Interact();
-        
-    }
-
+  
     void LateUpdate()
     {
         if (inputvec.x != 0 )
@@ -247,16 +202,6 @@ public class Player : MonoBehaviour
 
         CameraShake.Instance.Shake(0,dir);
 
-        //Vector2 dir = Vector2.right;
-
-        /* 타겟 방향계산 
-        if (target != null)
-        {
-            Vector2 bulletdir = target.transform.position - Bulletsp.position;
-            dir = bulletdir.normalized;
-        }
-        */
-
         bullet.GetComponent<bullet>().init(dir);
         
         status.ammo--;
@@ -265,11 +210,10 @@ public class Player : MonoBehaviour
 
     public void MeleeAttack()
     {
-        //프리펩 소환
+        if (!canMelee)
+            return;
 
-        //위치 조정
-        //마우스 방향
-        //init 전달
+        canMelee = false;
         GameObject bullet = Gamemanager.Instance.pool.normal.Get(3);
 
         bullet.transform.position = Bulletsp.position;
@@ -282,6 +226,14 @@ public class Player : MonoBehaviour
         bullet.transform.position = (Vector2)Bulletsp.position + (dir * 0.8f);
 
         bullet.GetComponent<bullet>().init(dir);
+
+        StartCoroutine(MeleeCool());
+    }
+
+    IEnumerator MeleeCool()
+    {
+        yield return new WaitForSeconds(meleeCooldown);
+        canMelee = true; 
     }
     public void Reloading()
     {
@@ -293,6 +245,8 @@ public class Player : MonoBehaviour
         is_reroading = false;
     }
 
+
+    //hit
     public void HitEffect()
     {
         CameraShake.Instance.Shake(1);
@@ -319,5 +273,15 @@ public class Player : MonoBehaviour
             return;
         anima.SetTrigger("dead");
         Gamemanager.Instance.ui.DeadCanva();
+    }
+
+    void OnMove(InputValue value)
+    {
+        inputvec = value.Get<Vector2>();
+    }
+    void OnInteract()
+    {
+        Gamemanager.Instance.interact.Interact();
+
     }
 }
