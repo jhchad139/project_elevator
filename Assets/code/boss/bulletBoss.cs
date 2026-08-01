@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class bulletBoss : Bossbase // 보스
 {
+    public bool isOrbit = false;
     private void Start()
     {
         //StartCoroutine(SpinCirclePattern());
-        ExplodePattern();
+        //Invoke("ExplodePattern",1f);
+        StartCoroutine(OrbitPattern());
+
     }
     IEnumerator SpinCirclePattern()
     {
@@ -20,6 +23,26 @@ public class bulletBoss : Bossbase // 보스
             if (i > 100)
                 yield break;
         }
+    }
+
+    IEnumerator OrbitPattern()
+    {
+        isOrbit = true;
+        int i = 0;
+        while (true)
+        {
+            Circle(0,0,5f);
+            yield return new WaitForSeconds(0.3f);
+            Circle(2,0,5f);
+            i++ ;
+            yield return new WaitForSeconds(0.3f);
+            if (i > 10)
+            {
+                isOrbit = false;
+                yield break;
+            }
+        }
+        
     }
     
     void ExplodePattern()
@@ -40,20 +63,21 @@ public class bulletBoss : Bossbase // 보스
 
         if (bulletObj.TryGetComponent<bossbullet>(out var bullet)) // 새로 생긴거라는데, 기존에 선언해서 겟컴포넌트보다 짧아졌대! 익숙해지자
         {
+            bullet.boss = this;
             bullet.Init(dir, speed);
         }
     }
 
-    public void Circle(int i = 0,float speed = 6f, Transform point = null)
+    public void Circle(int value = 0,int i = 0,float speed = 6f, Transform point = null)
     {
         if (point == null)
         {
             point = attackPoint;
         }
-        for (int angle = i; angle < 360 + i; angle += 30)
+        for (int angle = i; angle < 360 + i; angle += 20)
         {
             Vector2 dir = Quaternion.Euler(0, 0, angle) * Vector2.right; // right방향벡터를 angle각도만큼 돌려달라는뜻
-            SpawnBullet(dir, speed,0,point);
+            SpawnBullet(dir, speed,value,point);
         }
     }
 }

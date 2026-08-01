@@ -8,6 +8,9 @@ TagManager:
   - Area
   - Enemy
   - Wall
+  - Elevator
+  - Interact
+  - Melee
   layers:
   - Default
   - TransparentFX

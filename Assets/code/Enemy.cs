@@ -144,29 +144,42 @@ public class Enemy : MonoBehaviour
     }
 
 
- 
+
     //Ãæµ¹
     void OnTriggerEnter2D(Collider2D collision)
     {
-       
-        if (!collision.CompareTag("Bullet"))
-            return;
-        bullet bullet = collision.GetComponent<bullet>();
-        damage(bullet.dmg);
-        anima.SetTrigger("hit");
-
-        // transformÀº º¤ÅÍ 3ÀÌ°í, rigid´Â º¤ÅÍ2¶ó¼­ Çü¸ÂÃã
-        Vector2 bulletDir =rigid.position - (Vector2)collision.transform.position;
-        if (!is_dead)
+        if (collision.CompareTag("Bullet"))
         {
-            Debug.Log("hit");
-            is_knockback = true;
-            StartCoroutine(Knockback(bulletDir));
+
+            bullet bullet = collision.GetComponent<bullet>();
+            damage(bullet.dmg);
+            anima.SetTrigger("hit");
+
+            // transformÀº º¤ÅÍ 3ÀÌ°í, rigid´Â º¤ÅÍ2¶ó¼­ Çü¸ÂÃã
+            Vector2 bulletDir = rigid.position - (Vector2)collision.transform.position;
+            if (!is_dead)
+            {
+                Debug.Log("hit");
+                is_knockback = true;
+                StartCoroutine(Knockback(bulletDir));
+            }
+
+            collision.gameObject.SetActive(false); // ÃÑ¾Ë »ç¶óÁü
         }
-
-        collision.gameObject.SetActive(false); // ÃÑ¾Ë »ç¶óÁü
+        else if (collision.CompareTag("Melee"))
+        {
+            bullet bullet = collision.GetComponent<bullet>();
+            damage(bullet.dmg);
+            anima.SetTrigger("hit");
+            Vector2 bulletDir = rigid.position - (Vector2)collision.transform.position;
+            if (!is_dead)
+            {
+                Debug.Log("hit");
+                is_knockback = true;
+                StartCoroutine(Knockback(bulletDir));
+            }
+        }
     }
-
     IEnumerator Knockback(Vector2 dir)
     {
         

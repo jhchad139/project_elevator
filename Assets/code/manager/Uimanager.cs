@@ -6,6 +6,8 @@ public class Uimanager : MonoBehaviour
 {
     public GameObject playCanvas;
     public GameObject gameoverCanvas;
+    public GameObject interactCanvas;
+    public GameObject canInteract;
 
     public TMP_Text hptxt;
     public TMP_Text floortxt;
@@ -73,5 +75,14 @@ public class Uimanager : MonoBehaviour
 
         Application.Quit();
 #endif
+    }
+
+    public void OnInteractTalk()
+    {
+        interactCanvas.SetActive(true);
+    }
+    public void OffInteractTalk()
+    {
+        interactCanvas.SetActive(false);
     }
 }
