@@ -5,6 +5,12 @@ using UnityEngine;
 public class bulletBoss : Bossbase // º¸½º
 {
     public bool isOrbit = false;
+
+    private void Awake()
+    {
+        Gamemanager.Instance.ui.OnBossCanvas();
+         Gamemanager.Instance.ui.targetBoss = this;
+    }
     private void Start()
     {
         //StartCoroutine(SpinCirclePattern());

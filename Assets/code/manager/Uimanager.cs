@@ -7,20 +7,24 @@ public class Uimanager : MonoBehaviour
     public GameObject playCanvas;
     public GameObject gameoverCanvas;
     public GameObject interactCanvas;
+    public GameObject bossCanvas;
     public GameObject canInteract;
 
     public TMP_Text hptxt;
     public TMP_Text floortxt;
     public TMP_Text dashtxt;
     public TMP_Text ammotxt;
+    public TMP_Text bosstxt;
 
     public Slider hpSlider;
     public Slider dashSlider;
     public Slider ammoSlider;
+    public Slider bossSlider;
 
     public Player player;
     public player_status status;
 
+    public Bossbase targetBoss;
     private void Awake()
     {
         if (Gamemanager.Instance != null)
@@ -45,12 +49,19 @@ public class Uimanager : MonoBehaviour
         hpSlider.value = status.hp;
         dashSlider.value = status.dashCount;
 
+        bossSlider.value = targetBoss.hp;
+
         if (status.max_ammo != ammoSlider.maxValue)
             ammoSlider.maxValue = status.max_ammo;
         if(status.maxHp != hpSlider.maxValue)
             hpSlider.maxValue = status.maxHp;
         if(status.maxdashCount != dashSlider.maxValue)
             dashSlider.maxValue = status.maxdashCount;
+        if (targetBoss != null)
+        {
+            if (targetBoss.maxhp != bossSlider.maxValue)
+                bossSlider.maxValue = targetBoss.maxhp;
+        }
 
         
     }
@@ -84,5 +95,10 @@ public class Uimanager : MonoBehaviour
     public void OffInteractTalk()
     {
         interactCanvas.SetActive(false);
+    }
+
+    public void OnBossCanvas()
+    {
+        bossCanvas.SetActive(true);
     }
 }
