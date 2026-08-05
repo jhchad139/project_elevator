@@ -13,6 +13,8 @@ public class bulletBoss : Bossbase // 보스
     {
         Gamemanager.Instance.ui.OnBossCanvas();
          Gamemanager.Instance.ui.targetBoss = this;
+
+        StartCoroutine(FallingWheel());
     }
     private void Start()
     {
@@ -34,6 +36,7 @@ public class bulletBoss : Bossbase // 보스
         }
     }
 
+    
 
     private void Update()
     {
@@ -66,7 +69,17 @@ public class bulletBoss : Bossbase // 보스
 
     }
 
-    //void FallingWheel() {} 만들고
+    IEnumerator FallingWheel()
+    {
+        yield return new WaitForSeconds(1f);
+        GameObject obj = Gamemanager.Instance.pool.boss.Get(2);
+
+        obj.GetComponent<fallingwheel>()
+           .Init(Gamemanager.Instance.player.transform.position);
+
+
+        
+    }
     //void DestroyGun() {}
     //void +
     //void X
