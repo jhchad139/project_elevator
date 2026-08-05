@@ -1,10 +1,13 @@
 using System.Collections;
-using System.Drawing;
 using UnityEngine;
 
 public class bulletBoss : Bossbase // 보스
 {
     public bool isOrbit = false;
+
+
+    float patternTimer = 0;
+    float patternTerm = 15f;
 
     private void Awake()
     {
@@ -15,7 +18,7 @@ public class bulletBoss : Bossbase // 보스
     {
         //StartCoroutine(SpinCirclePattern());
         //Invoke("ExplodePattern",1f);
-        StartCoroutine(OrbitPattern());
+        //StartCoroutine(OrbitPattern());
 
     }
     IEnumerator SpinCirclePattern()
@@ -30,6 +33,43 @@ public class bulletBoss : Bossbase // 보스
                 yield break;
         }
     }
+
+
+    private void Update()
+    {
+        //나중에, isAngry감지해서 패턴텀을 줄이는 식으로 속도 조절 ㄱㄱ
+        patternTimer += Time.deltaTime;
+        if (patternTimer > patternTerm)
+        {
+            UsePattern();
+            patternTimer = 0;
+        }
+    }
+
+    void UsePattern()
+    {
+        //랜덤으로 숫자 하나 골라
+        int n = 1;
+
+        switch (n)
+        {
+            case 1: //패턴1
+                break;
+
+            case 2: //패턴2
+                break;
+
+            case 3: //패턴3
+                break;
+
+        }
+
+    }
+
+    //void FallingWheel() {} 만들고
+    //void DestroyGun() {}
+    //void +
+    //void X
 
     IEnumerator OrbitPattern()
     {
@@ -54,7 +94,7 @@ public class bulletBoss : Bossbase // 보스
     void ExplodePattern()
     {
         Vector2 dir = Gamemanager.Instance.player.transform.position- gameObject.transform.position ;
-        SpawnBullet(dir, 30f, 1);
+        SpawnBullet(dir.normalized, 30f, 1);
     }
 
     void SpawnBullet(Vector2 dir, float speed , int i = 0, Transform point = null)
@@ -87,3 +127,40 @@ public class bulletBoss : Bossbase // 보스
         }
     }
 }
+/*
+ 지금 있는 탄막 - 
+circle - 십자가, 원형 등으로 변형시켜 사용할수 있음.
+orbit - 공전, 퍼지는 탄이 빙글빙글
+explode - 큰거 한방 빵 ,  벽에 닿으면 잔탄 퍼짐
+
+생각중인 패턴
+십자가(십자가로 쭉 할지, 회전을 넣을지, 십자가랑 X를 동시에 쏘게 할지)
+공전 - 빙글빙글 도는걸 좀 촘촘하게, 간격을 다르게
+레이저를 쏘면서 , 돌리면서, explode를 쏴 ? 일단 레이저 나중에...?
+
+circle 응용 3개
+orbit 응용 3개
+explode 는 모든 패턴? 에 섞고
+
+
+
+추가 할 패턴 
+관람차 낙하패턴
+기관총 파괴 패턴 
+
+시작은 일반. 
+
+hp가 75%이하로 떨어지면 
+관람차 낙하패턴 추가, 쿨타임 15초
+
+hp가 25% 이하로 떨어지면
+관람차 낙하패턴 쿨타임 8초
+
+기본 패턴
+
+
+
+
+
+hp가 50% 이하로 떨어지면 광폭화
+ */

@@ -193,14 +193,14 @@ public class Enemy : MonoBehaviour
     
 
     void damage(int n)
-    {
+    { 
         hp -= n;
 
         if (hp <= 0) {  
             hp = 0;
             Die();
         }
-            
+           
     }
 
     void Die()
