@@ -284,4 +284,9 @@ public class Player : MonoBehaviour
         Gamemanager.Instance.interact.Interact();
 
     }
+
+    void OnSprint()
+    {
+        Dash();
+    }
 }

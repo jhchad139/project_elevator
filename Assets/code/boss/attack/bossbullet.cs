@@ -22,7 +22,6 @@ public class bossbullet : MonoBehaviour // º¸½º°¡ ½î´Â Åº¸·
         
         if (boss.isOrbit)
         {
-            Debug.Log("a");
             float baseAngle = gameObject.CompareTag("Reverse") ? -15f : 15f;
 
             float rotateAngle = baseAngle * Time.deltaTime;
@@ -32,14 +31,16 @@ public class bossbullet : MonoBehaviour // º¸½º°¡ ½î´Â Åº¸·
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isExplode)
+        if (collision.gameObject.CompareTag("Wall"))
         {
-            if (collision.gameObject.CompareTag("Wall"))
+            if (isExplode)
             {
                 boss.Circle(0, 0, 3f, gameObject.transform);
                 boss.Circle(0, 10, 3f, gameObject.transform);
                 gameObject.SetActive(false);
             }
+            else
+                gameObject.SetActive(false);
         }
 
         if (!collision.CompareTag("Player"))

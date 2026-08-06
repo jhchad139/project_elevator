@@ -23,6 +23,13 @@ public class fallingwheel : MonoBehaviour
     {
         if (isFalling)
         transform.position += Vector3.down * fallSpeed * Time.deltaTime;
+
+        if (transform.position.y <= shadow.transform.position.y) {
+
+
+            transform.position = shadow.transform.position;
+            isFalling = false;
+        }
     }
 
     
@@ -49,11 +56,10 @@ public class fallingwheel : MonoBehaviour
     {
         float fallingTiming = 56f / fallSpeed;
         isFalling = true;
+        
         yield return new WaitForSeconds(fallingTiming*0.85f);
         anima.SetTrigger("fall");
-        yield return new WaitForSeconds(fallingTiming * 0.15f);
-        isFalling = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         shadow.SetActive(false);
         gameObject.SetActive(false);
     }

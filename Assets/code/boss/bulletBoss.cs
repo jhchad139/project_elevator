@@ -5,16 +5,18 @@ public class bulletBoss : Bossbase // 보스
 {
     public bool isOrbit = false;
 
+    public int phase  = 0;
 
     float patternTimer = 0;
-    float patternTerm = 15f;
+    float patternTerm = 8f;
 
+    float fallingTimer = 0f;
+    float fallintTerm = 10f;
     private void Awake()
     {
         Gamemanager.Instance.ui.OnBossCanvas();
          Gamemanager.Instance.ui.targetBoss = this;
 
-        StartCoroutine(FallingWheel());
     }
     private void Start()
     {
@@ -25,10 +27,12 @@ public class bulletBoss : Bossbase // 보스
     }
     IEnumerator SpinCirclePattern()
     {
+
         int i = 0;
         while (true)
         {
-            Circle(i);
+            Debug.Log(i);
+            Circle(0,i);
             i += 4;
             yield return new WaitForSeconds(0.25f);
             if (i > 100)
@@ -42,27 +46,44 @@ public class bulletBoss : Bossbase // 보스
     {
         //나중에, isAngry감지해서 패턴텀을 줄이는 식으로 속도 조절 ㄱㄱ
         patternTimer += Time.deltaTime;
-        if (patternTimer > patternTerm)
+        fallingTimer += Time.deltaTime;
+
+        if (patternTimer >= patternTerm)
         {
             UsePattern();
             patternTimer = 0;
         }
+
+        if (fallingTimer >= fallintTerm)
+        {
+            StartCoroutine(FallingWheel());
+            fallingTimer = 0;
+        }
+
+
     }
 
     void UsePattern()
     {
         //랜덤으로 숫자 하나 골라
-        int n = 1;
+        int n = Random.Range(1,4+phase);
 
         switch (n)
         {
             case 1: //패턴1
+                StartCoroutine(SpinCirclePattern());
+                Debug.Log("1");
                 break;
 
             case 2: //패턴2
+                Invoke("ExplodePattern", 1f);
+                Debug.Log("2");
                 break;
 
             case 3: //패턴3
+
+                StartCoroutine(OrbitPattern());
+                Debug.Log("3");
                 break;
 
         }
@@ -77,8 +98,6 @@ public class bulletBoss : Bossbase // 보스
         obj.GetComponent<fallingwheel>()
            .Init(Gamemanager.Instance.player.transform.position);
 
-
-        
     }
     //void DestroyGun() {}
     //void +
@@ -92,7 +111,7 @@ public class bulletBoss : Bossbase // 보스
         {
             Circle(0,0,5f);
             yield return new WaitForSeconds(0.3f);
-            Circle(2,0,5f);
+            Circle(4,0,5f);
             i++ ;
             yield return new WaitForSeconds(0.3f);
             if (i > 10)
