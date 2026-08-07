@@ -1,8 +1,13 @@
 using System.Collections;
+using Unity.Hierarchy;
+using UnityEditor;
 using UnityEngine;
 
 public class bulletBoss : Bossbase // 보스
 {
+    public bool isDirection = false;
+    bool hpDirect = false;
+    int bossNum = 0;
     public bool isOrbit = false;
 
     public int phase  = 0;
@@ -14,8 +19,10 @@ public class bulletBoss : Bossbase // 보스
     float fallintTerm = 10f;
     private void Awake()
     {
-        Gamemanager.Instance.ui.OnBossCanvas();
+        //Camera_move.instance.targetTransform[bossNum] = this.transform;
+        //Gamemanager.Instance.ui.OnBossCanvas();
          Gamemanager.Instance.ui.targetBoss = this;
+        
 
     }
     private void Start()
@@ -23,7 +30,29 @@ public class bulletBoss : Bossbase // 보스
         //StartCoroutine(SpinCirclePattern());
         //Invoke("ExplodePattern",1f);
         //StartCoroutine(OrbitPattern());
+        StartCoroutine(TestCamera());
+    }
 
+    IEnumerator TestCamera()
+    {
+        Gamemanager.Instance.player.canMove = false;
+        yield return new WaitForSeconds(1f);
+        Cameramove.instance.StartSequence(bossNum);
+        yield return new WaitForSeconds(2f);
+        Gamemanager.Instance.ui.OnBossCanvas();
+        hpDirect = true;
+        yield return new WaitForSeconds(3f);
+        Cameramove.instance.Reset();
+        hpDirect = false;
+        Gamemanager.Instance.player.canMove = true;
+        isDirection = false;
+    }
+
+    private void OnEnable()
+    {
+        //Gamemanager.Instance.ui.OnBossCanvas();
+        Gamemanager.Instance.ui.targetBoss = this;
+        
     }
     IEnumerator SpinCirclePattern()
     {
@@ -44,6 +73,15 @@ public class bulletBoss : Bossbase // 보스
 
     private void Update()
     {
+        if (hpDirect) {
+            hp += 3;
+            return;
+        }
+
+        if (isDirection)
+        {
+            return;
+        }
         //나중에, isAngry감지해서 패턴텀을 줄이는 식으로 속도 조절 ㄱㄱ
         patternTimer += Time.deltaTime;
         fallingTimer += Time.deltaTime;

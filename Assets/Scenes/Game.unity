@@ -518,14 +518,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192701049}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1025683193}
   - {fileID: 227765352}
-  m_Father: {fileID: 395397067}
+  m_Father: {fileID: 1067028202}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &192701051
 MonoBehaviour:
@@ -1911,7 +1911,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 680662129}
-  - {fileID: 192701050}
   - {fileID: 1836803555}
   - {fileID: 835036504}
   - {fileID: 1598112246}
@@ -3205,6 +3204,7 @@ MonoBehaviour:
   speed: 5
   Bulletsp: {fileID: 173706682}
   Bulletprefab: {fileID: 2951805250307084978, guid: 0577f87984e2a9e45b3e3216a9b18f17, type: 3}
+  canMove: 1
   is_reroading: 0
 --- !u!50 &613478686
 Rigidbody2D:
@@ -5478,6 +5478,7 @@ Transform:
   m_Children:
   - {fileID: 516782429}
   - {fileID: 1495408382}
+  - {fileID: 192701050}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1067028203
@@ -8499,6 +8500,64 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.5, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1760372192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1760372193}
+  - component: {fileID: 1760372194}
+  m_Layer: 0
+  m_Name: Camera Move
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1760372193
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760372192}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1813085000}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1760372194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760372192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d5daa09d4fa1d4fa22866abf81732c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Camera_move
+  mainCamera: {fileID: 330585545}
+  cinemachine: {fileID: 487061241}
+  targetTransform:
+  - {fileID: 3894838994733670525}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  duration: 1.5
 --- !u!1 &1791601413
 GameObject:
   m_ObjectHideFlags: 0
@@ -8714,6 +8773,7 @@ Transform:
   - {fileID: 330585546}
   - {fileID: 487061242}
   - {fileID: 43835808}
+  - {fileID: 1760372193}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1815742710
@@ -10628,10 +10688,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::bulletBoss
   attackPoint: {fileID: 7871657245433959255}
-  hp: 100
+  hp: 1
   maxhp: 100
   angryHp: 80
   isAngry: 0
+  isDirection: 0
   isOrbit: 0
   phase: 0
 --- !u!95 &8300411899928461349

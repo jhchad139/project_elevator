@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     Vector2 inputvec;
     player_status status;
 
-
+    public bool canMove = true;
 
 
     // 대시 관련 변수
@@ -72,6 +72,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!canMove)
+            return;
 
         if (isDashing == false && status.isDead == false)
         {
@@ -95,6 +97,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (!canMove)
+            return;
         //대쉬
         if (dashtimeronoff == true)
             dashTimer += Time.deltaTime;
