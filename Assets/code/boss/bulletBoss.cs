@@ -6,7 +6,6 @@ using UnityEngine;
 public class bulletBoss : Bossbase // 보스
 {
     public bool isDirection = false;
-    bool hpDirect = false;
     int bossNum = 0;
     public bool isOrbit = false;
 
@@ -17,46 +16,62 @@ public class bulletBoss : Bossbase // 보스
 
     float fallingTimer = 0f;
     float fallintTerm = 10f;
+
+    Animator anima;
     private void Awake()
     {
-        //Camera_move.instance.targetTransform[bossNum] = this.transform;
-        //Gamemanager.Instance.ui.OnBossCanvas();
-         Gamemanager.Instance.ui.targetBoss = this;
-        
-
+        anima  = GetComponent<Animator>();
     }
     private void Start()
     {
         //StartCoroutine(SpinCirclePattern());
         //Invoke("ExplodePattern",1f);
         //StartCoroutine(OrbitPattern());
-        StartCoroutine(TestCamera());
-    }
-
-    IEnumerator TestCamera()
-    {
-        Gamemanager.Instance.player.canMove = false;
-        yield return new WaitForSeconds(1f);
-        Cameramove.instance.StartSequence(bossNum);
-        yield return new WaitForSeconds(2f);
-        Gamemanager.Instance.ui.OnBossCanvas();
-        hpDirect = true;
-        yield return new WaitForSeconds(3f);
-        Cameramove.instance.Reset();
-        hpDirect = false;
-        Gamemanager.Instance.player.canMove = true;
-        isDirection = false;
+        //StartCoroutine(BossIntro());
     }
 
     private void OnEnable()
     {
-        //Gamemanager.Instance.ui.OnBossCanvas();
         Gamemanager.Instance.ui.targetBoss = this;
-        
+        StartCoroutine(BossIntro());
     }
+
+    IEnumerator BossIntro()
+    {
+        yield return new WaitForSeconds(1f);
+        Gamemanager.Instance.player.canMove = false;
+        yield return new WaitForSeconds(1f);
+        Cameramove.instance.StartSequence(bossNum);
+        yield return new WaitForSeconds(2f);
+        anima.SetBool("intro", true);
+        CameraShake.Instance.Shake(1); 
+        Gamemanager.Instance.ui.OnBossCanvas();
+        hp = 1;
+        //체력재생
+        float duration = 3f;
+        float elapsed = 0f; //경과한 시간 익숙해지자
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            hp = Mathf.RoundToInt(Mathf.Lerp(1f, maxHp, elapsed / duration));
+
+            yield return null;
+        }
+
+        anima.SetBool("intro", false);
+        hp = maxHp;
+        Cameramove.instance.DoBoss();
+        Gamemanager.Instance.player.canMove = true;
+        isDirection = false;
+
+       
+    }
+
+   
+
+    
     IEnumerator SpinCirclePattern()
     {
-
         int i = 0;
         while (true)
         {
@@ -73,10 +88,6 @@ public class bulletBoss : Bossbase // 보스
 
     private void Update()
     {
-        if (hpDirect) {
-            hp += 3;
-            return;
-        }
 
         if (isDirection)
         {

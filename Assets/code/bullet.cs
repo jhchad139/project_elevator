@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class bullet : MonoBehaviour
@@ -45,15 +46,20 @@ public class bullet : MonoBehaviour
         {
             sprite.flipX = true;
         }
-        btargetvec = target.normalized;
+        btargetvec = target.normalized;// 마우스클릭방향
         float angle = Mathf.Atan2(btargetvec.y, btargetvec.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
     }
     void Update()
     {
-        
-        this.transform.Translate(btargetvec * speed * Time.deltaTime, Space.World);
+        if (gameObject.CompareTag("Melee"))
+        {
+            this.transform.position = (Vector2)Gamemanager.Instance.player.transform.position 
+                + btargetvec * 0.8f;
+        }
+        else
+            this.transform.Translate(btargetvec * speed * Time.deltaTime, Space.World);
     }
 
     private void DisableAttack()

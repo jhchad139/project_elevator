@@ -1,4 +1,4 @@
-ï»¿using System.Collections;
+using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -12,27 +12,32 @@ public class Cameramove : MonoBehaviour
 
     private Vector3 originPos;
     private float originSize;
-    private Coroutine activeCoroutine;
 
     public static Cameramove instance;
 
-
-    private void Start()
+    private void Awake()
     {
         instance = this;
+    }
+    private void Start()
+    {
         originPos = mainCamera.transform.position;
         originSize = mainCamera.orthographicSize;
     }
-    public void StartSequence(int i)
+    public void StartSequence(int i) // ¿òÁ÷ÀÓ ½ÇÇà
     {
         cinemachine.gameObject.SetActive(false);
         StartCoroutine(CameraRoutine(i));
     }
 
-    public void Reset()
+    public void Reset() // ±âº» Ä«¸Þ¶ó
     {
         StartCoroutine(CameraReset());
-        
+    }
+
+    public void DoBoss() // º¸½ºÀü Ä«¸Þ¶ó
+    {
+        StartCoroutine(CameraDoBoss());
     }
 
     private IEnumerator CameraRoutine(int i)
@@ -45,7 +50,7 @@ public class Cameramove : MonoBehaviour
 
         float time = 0f;
 
-        //ï¿½ï¿½ï¿½îµµ ï¿½Ë´Ï´ï¿½ ï¿½×³ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //???? ???? ??? ????
         while (time < duration)
         {
             time += Time.deltaTime;
@@ -60,7 +65,7 @@ public class Cameramove : MonoBehaviour
         mainCamera.orthographicSize = endSize;
     }
 
-    private IEnumerator CameraReset()
+    private IEnumerator CameraDoBoss()
     {
         Vector3 startPos = mainCamera.transform.position;
         float startSize = mainCamera.orthographicSize;
@@ -84,7 +89,31 @@ public class Cameramove : MonoBehaviour
         cinemachine.gameObject.SetActive(true);
         mainCamera.transform.position = endPos;
         mainCamera.orthographicSize = endSize;
-        activeCoroutine = null;
+    }
+    private IEnumerator CameraReset()
+    {
+        Vector3 startPos = mainCamera.transform.position;
+        float startSize = mainCamera.orthographicSize;
+
+        Vector3 endPos = originPos;
+        float endSize = originSize;
+
+        float time = 0f;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = time / duration;
+            t = Mathf.SmoothStep(0f, 1f, t);
+
+            mainCamera.transform.position = Vector3.Lerp(startPos, endPos, t);
+            mainCamera.orthographicSize = Mathf.Lerp(startSize, endSize, t);
+
+            yield return null;
+        }
+        cinemachine.gameObject.SetActive(true);
+        mainCamera.transform.position = endPos;
+        mainCamera.orthographicSize = endSize;
     }
 }
 

@@ -4211,7 +4211,7 @@ MonoBehaviour:
   interact: {fileID: 0}
   baseMaxHp: 100
   baseMaxDash: 5
-  baseBulletCount: 0
+  baseBulletCount: 10
   startMaxHp: 0
   startMaxDash: 0
   startBulletCount: 0
@@ -10689,7 +10689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::bulletBoss
   attackPoint: {fileID: 7871657245433959255}
   hp: 1
-  maxhp: 100
+  maxHp: 100
   angryHp: 80
   isAngry: 0
   isDirection: 0

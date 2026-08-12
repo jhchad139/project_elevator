@@ -59,8 +59,8 @@ public class Uimanager : MonoBehaviour
             dashSlider.maxValue = status.maxdashCount;
         if (targetBoss != null)
         {
-            if (targetBoss.maxhp != bossSlider.maxValue)
-                bossSlider.maxValue = targetBoss.maxhp;
+            if (targetBoss.maxHp != bossSlider.maxValue)
+                bossSlider.maxValue = targetBoss.maxHp;
         }
 
         

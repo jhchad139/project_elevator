@@ -55,10 +55,15 @@ public class Player : MonoBehaviour
     
     void Awake()
     {
+        if (Gamemanager.Instance != null)
+        {
+            Gamemanager.Instance.player = this;
+        }
         rigid = GetComponent<Rigidbody2D>();
         anima = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         status = GetComponent<player_status>();
+        
     }
 
     private void Start()
@@ -220,14 +225,9 @@ public class Player : MonoBehaviour
         canMelee = false;
         GameObject bullet = Gamemanager.Instance.pool.normal.Get(3);
 
-        bullet.transform.position = Bulletsp.position;
-
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-
         mousePos += Vector2.down * 1.5f;
         Vector2 dir = (mousePos - (Vector2)Bulletsp.position).normalized;
-
-        bullet.transform.position = (Vector2)Bulletsp.position + (dir * 0.8f);
 
         bullet.GetComponent<bullet>().init(dir);
 

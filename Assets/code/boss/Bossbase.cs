@@ -5,7 +5,7 @@ public class Bossbase : MonoBehaviour
     public Transform attackPoint;
 
     public int hp;
-    public int maxhp;
+    public int maxHp;
 
     public int angryHp;
     public bool isAngry = false;
